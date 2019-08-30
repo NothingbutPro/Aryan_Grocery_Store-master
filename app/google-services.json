@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "731746818248",
+    "firebase_url": "https://aryanstore-b2507.firebaseio.com",
+    "project_id": "aryanstore-b2507",
+    "storage_bucket": "aryanstore-b2507.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731746818248:android:d069b1549f6960af",
+        "android_client_info": {
+          "package_name": "com.aryanonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731746818248-hi2tkbb1cp4j5lhk9ucfjh1vij1ffesd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aryanonline",
+            "certificate_hash": "ec1e8750eb153ef83047240b1319f97bdfe55104"
+          }
+        },
+        {
+          "client_id": "731746818248-prb1ovc2j0297ni1finc25jdmt4i0vm1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx67oNU1iQxeqB0LzvxWpcqQ9cefxQXzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731746818248-prb1ovc2j0297ni1finc25jdmt4i0vm1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
