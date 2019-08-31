@@ -67,8 +67,13 @@ public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewH
         String Colour = dealList.get(position);
         Log.d("colour" , "is"+Colour);
       //  viewHolder.colour_id.setBackgroundColor(Color.RED);
-        viewHolder.colour_id.setBackgroundColor(Color.parseColor(Colour));
-        viewHolder.color_text.setText(Colour);
+        try {
+            viewHolder.colour_id.setBackgroundColor(Color.parseColor(Colour));
+            viewHolder.color_text.setText(Colour);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
 
     }

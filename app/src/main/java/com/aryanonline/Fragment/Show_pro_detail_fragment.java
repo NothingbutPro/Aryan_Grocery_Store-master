@@ -167,6 +167,7 @@ public class Show_pro_detail_fragment extends Fragment {
             colours_adapter = new Colours_Adapter(getActivity() , ColoursList);
             procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             procolour.setAdapter(colours_adapter);
+            //Colour is size??????????????????????????????????????????
         }else   if(!map.get("s_colour").isEmpty()) {
 //            int size  =  map.get("s_colour").length();
 //            for(int px=0;px<map.get("s_colour").length();px++)
@@ -196,53 +197,100 @@ public class Show_pro_detail_fragment extends Fragment {
 //              }
 //            }
             Toast.makeText(getActivity(), "THis is not a cloth size "+map.get("s_colour").length(), Toast.LENGTH_SHORT).show();
-            for (int px=0;px<map.get("s_colour").length();px++)
+            for (int cl=0;cl<=map.get("s_colour").length();cl++)
             {
-                if(px==0)
+                if(cl==0)
                 {
-                    strinx =  map.get("s_colour").toString().substring(thisposition,px);
+                    strinx =  map.get("s_colour").toString().substring(thisposition,cl);
                 }else {
                     if(!strinx.isEmpty()) {
-                        if (!strinx.contains(",") &&!(px == map.get("s_colour").length()-1) ) {
-                            strinx = map.get("s_colour").substring(thisposition, px);
+                        if (!strinx.contains(",") &&!(cl == map.get("s_colour").length()-1) ) {
+                            strinx = map.get("s_colour").substring(thisposition, cl);
                         } else {
-                            if(!(px == map.get("s_colour").length()-1) ) {
-                                strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                ColoursList.add(strinx);
-                                Log.e("Colour if uis", "" + strinx);
+                            if(!(cl == map.get("s_colour").length()) ) {
+                                if(!strinx.contains(",")) {
+                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                    SizesList.add(strinx);
+                                    Log.e("s_size if uis", "" + strinx);
+                                }else {
+                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                    SizesList.add(strinx);
+                                    Log.e("s_size if uis", "" + strinx);
+                                    strinx ="";
+                                    thisposition = cl-1;
+//                                    cl=cl-2;
+                                }
                                 //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                thisposition = px ;
+
+
                                 //   cl = thisposition;
                                 strinx = "";
                             }else {
                                 // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
-                                strinx=  strinx + map.get("s_colour").substring(px-1);
-                                ColoursList.add(strinx);
-                                Log.e("Colour else  uis", "" + map.get("s_colour").substring(px-1));
-                                Log.e("Colour else strinx  uis", "" + strinx);
+                              //  strinx=  strinx + map.get("s_colour").substring(cl-1);
+                                strinx=  strinx + map.get("s_colour").substring(cl-1);
+                                SizesList.add(strinx);
+//                                if(strinx.contains(",")) {
+//                                    strinx =  map.get("s_colour").substring(thisposition,cl-2);
+//                                    SizesList.add(strinx);
+//                                    Log.e("s_size else strinx  uis", "" + strinx);
+//                                    strinx ="";
+//                                }else {
+//                                    strinx=  strinx + map.get("s_colour").substring(cl-2);
+//                                    SizesList.add(strinx);
+//                                    Log.e("s_size else strinx  uis", "" + strinx);
+//                                }
+                           //     SizesList.add(strinx);
+                                Log.e("s_size else  uis", "" + map.get("s_colour").substring(cl-1));
+                                Log.e("s_size else strinx  uis", "" + strinx);
                                 //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                //thisposition = cl - 1;
+                             //   thisposition = cl - 1;
                                 //   cl = thisposition;
                                 strinx = "";
+//                                SizesList.add("White");
                             }
                         }
                     }else {
-                        strinx = map.get("s_colour").substring(thisposition, px);
-                     //   px=thisposition;
-                        thisposition =px;
+                        strinx = map.get("s_colour").substring(thisposition, cl);
+                      //  cl=thisposition;
+                        if(thisposition ==0) {
+                            thisposition = cl - 1;
+                        }else {
+                            thisposition = cl - 2;
+                        }
 
                     }
                 }
 
 //                cl++;
             }
+        if(map.get("s_colour").contains("10"))
+        {
+            SizesList.add("10");
 
+        }if(map.get("s_colour").contains("11"))
+            {
+                SizesList.add("11");
+            }if(map.get("s_colour").contains("12"))
+            {
+                SizesList.add("12");
+            }if(map.get("s_colour").contains("13"))
+            {
+                SizesList.add("13");
+            }if(map.get("s_colour").contains("14"))
+            {
+                SizesList.add("14");
+            }if(map.get("s_colour").contains("15"))
+            {
+                SizesList.add("15");
+            }
             strinx="";
             thisposition =0;
-            colours_adapter = new Colours_Adapter(getActivity() , ColoursList);
-            procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            procolour.setAdapter(colours_adapter);
+            sizesAdapter = new SizesAdapter(getActivity() , SizesList);
+            shoesizesc.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            shoesizesc.setAdapter(sizesAdapter);
         }
+        //it is a color
          if(!map.get("s_size").isEmpty()){
             int size  =  map.get("s_size").length();
             Toast.makeText(getActivity(), "THis is not a cloth size "+map.get("cloth_colour").length(), Toast.LENGTH_SHORT).show();
@@ -258,17 +306,17 @@ public class Show_pro_detail_fragment extends Fragment {
                         } else {
                             if(!(cl == map.get("s_size").length()-1) ) {
                                 strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                SizesList.add(strinx);
+                                ColoursList.add(strinx);
                                 Log.e("s_size if uis", "" + strinx);
                                 //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                thisposition = cl - 1;
+                                thisposition = cl;
                                 //   cl = thisposition;
                                 strinx = "";
                             }else {
                                 // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
                                 strinx=  strinx + map.get("s_size").substring(cl-1);
-                                SizesList.add(strinx);
-                                SizesList.add(strinx);
+                                ColoursList.add(strinx);
+                               // SizesList.add(strinx);
                                 Log.e("s_size else  uis", "" + map.get("s_size").substring(cl-1));
                                 Log.e("s_size else strinx  uis", "" + strinx);
                                 //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
@@ -279,8 +327,15 @@ public class Show_pro_detail_fragment extends Fragment {
                             }
                         }
                     }else {
+
                         strinx = map.get("s_size").substring(thisposition, cl);
-                        cl=thisposition;
+//                        cl=thisposition;
+                        if(thisposition ==0) {
+                            thisposition = cl - 1;
+                        }else {
+                            thisposition = cl - 2;
+                        }
+
 
                     }
                 }
@@ -290,9 +345,9 @@ public class Show_pro_detail_fragment extends Fragment {
 
              strinx="";
              thisposition =0;
-            sizesAdapter = new SizesAdapter(getActivity() , SizesList);
-            shoesizesc.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            shoesizesc.setAdapter(sizesAdapter);
+             colours_adapter = new Colours_Adapter(getActivity() , ColoursList);
+             procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+             procolour.setAdapter(colours_adapter);
         } else
              if(!map.get("cloth_size").isEmpty()){
                  int size  =  map.get("cloth_size").length();
@@ -336,8 +391,12 @@ public class Show_pro_detail_fragment extends Fragment {
                              strinx = map.get("cloth_size").substring(thisposition, cl);
                       //      cl=thisposition;
                       //       SizesList.add(strinx);
-                            thisposition=cl-1;
-
+//                            thisposition=cl-1;
+                             if(thisposition ==0) {
+                                 thisposition = cl - 1;
+                             }else {
+                                 thisposition = cl - 2;
+                             }
                          }
                      }
 
