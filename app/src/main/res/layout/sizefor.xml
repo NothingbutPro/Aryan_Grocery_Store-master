@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@drawable/xml_textbox_blue_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:text="p"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:id="@+id/size_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:visibility="gone"
+
+            android:text="hjshs"
+            android:textAlignment="center"
+            android:id="@+id/size_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+    </LinearLayout>
+</LinearLayout>
