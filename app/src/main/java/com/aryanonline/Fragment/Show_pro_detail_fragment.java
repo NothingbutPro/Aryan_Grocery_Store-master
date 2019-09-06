@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,6 +25,8 @@ import com.aryanonline.Adapter.SizesAdapter;
 import com.aryanonline.Config.BaseURL;
 import com.aryanonline.MainActivity;
 import com.aryanonline.R;
+import com.aryanonline.Replacement_Activity;
+import com.aryanonline.Warranty_Activity;
 import com.aryanonline.util.DatabaseHandler;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -36,6 +39,7 @@ public class Show_pro_detail_fragment extends Fragment {
     TextView add_to_cart,prod_buy_now,prod_name,tv_prod_price,tv_prod_desc,prod_in_stock,
             tv_emi,tv_waranty,tv_offer_desc;
     ImageView prod_img,iv_special_offer,offer_image;
+    String shoe_colour ="no",cloth_colour = "no",cloth_size = "no",shoe_size = "no";
     ArrayList<String> ColoursList = new ArrayList<>();
     ArrayList<String> SizesList = new ArrayList<>();
    // ArrayList<String> SizesList = new ArrayList<>();
@@ -44,11 +48,12 @@ public class Show_pro_detail_fragment extends Fragment {
     private Context context;
     HashMap<String, String> map = new HashMap<>();
     private String strinx;
+    TextView waryxt,replacetxt;
     private String strinx2;
     int thisposition =0;
     Colours_Adapter colours_adapter;
     SizesAdapter sizesAdapter;
-
+    public static  TextView colour_sel ,size_sel;
     public Show_pro_detail_fragment() {
         // Required empty public constructor
     }
@@ -68,8 +73,12 @@ public class Show_pro_detail_fragment extends Fragment {
         ((MainActivity) getActivity()).setTitle("Product Detail");
 
         add_to_cart=view.findViewById(R.id.add_to_cart);
+        waryxt=view.findViewById(R.id.waryxt);
+        replacetxt=view.findViewById(R.id.replacetxt);
         prod_img=view.findViewById(R.id.prod_img);
         prod_name=view.findViewById(R.id.prod_name);
+        colour_sel=view.findViewById(R.id.colour_sel);
+        size_sel=view.findViewById(R.id.size_sel);
         tv_prod_price=view.findViewById(R.id.tv_prod_price);
         //Recyler viewsssssssss+++++++++++++++++++++++++++++++++
         procolour=view.findViewById(R.id.procolour);
@@ -86,11 +95,25 @@ public class Show_pro_detail_fragment extends Fragment {
         tv_offer_desc=view.findViewById(R.id.tv_offer_desc);
 
         dbcart = new DatabaseHandler(getActivity());
-
-
+        waryxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext() , Warranty_Activity.class);
+                startActivity(intent);
+            }
+        });
+        replacetxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext() , Replacement_Activity.class);
+                startActivity(intent);
+            }
+        });
         try {
 
             map.put("product_id", getArguments().getString("product_id"));
+
+            //for now++++++++++++++++++++++++++++++++++++
             map.put("category_id", getArguments().getString("category_id"));
             map.put("product_image", getArguments().getString("product_image"));
             map.put("increament", getArguments().getString("increament"));
@@ -99,10 +122,30 @@ public class Show_pro_detail_fragment extends Fragment {
             map.put("stock",getArguments().getString("stock"));
             map.put("title", getArguments().getString("title"));
             // fOR CLOTHES ++++++++++++++++++++++++++++++++++++++++
-            map.put("cloth_colour", getArguments().getString("cloth_colour"));
-            map.put("cloth_size", getArguments().getString("cloth_size"));
-            map.put("s_colour", getArguments().getString("s_colour"));
-            map.put("s_size", getArguments().getString("s_size"));
+            try {
+                if(!getArguments().getString("cloth_colour").isEmpty()) {
+                    map.put("colour", getArguments().getString("cloth_colour"));
+                    cloth_colour = getArguments().getString("cloth_colour");
+
+                }else if(!getArguments().getString("s_colour").isEmpty() )
+                {
+                    map.put("colour", getArguments().getString("s_size"));
+                    shoe_colour = getArguments().getString("s_size");
+                }
+                if(!getArguments().getString("cloth_size").isEmpty())
+                {
+                    map.put("size", getArguments().getString("cloth_size"));
+                    cloth_size = getArguments().getString("cloth_size");
+                }else if(!getArguments().getString("s_size").isEmpty()) {
+
+                    //   map.put("s_colour", getArguments().getString("s_colour"));
+                    map.put("size", getArguments().getString("s_colour"));
+                    shoe_size =  getArguments().getString("s_colour");
+                }
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
          //   map.put("cloth_size", getArguments().getString("cloth_size"));
             //++++++++++++++++++++++++++++++++++++++++++++++++++
             map.put("unit", getArguments().getString("unit"));
@@ -119,56 +162,55 @@ public class Show_pro_detail_fragment extends Fragment {
         prod_name.setText(map.get("product_name"));
         tv_prod_desc.setText("Product Description: "+map.get("Prod_description"));
         tv_prod_price.setText(map.get("unit_value")+" "+map.get("unit")+" "+"INR "+map.get("price"));
-        if(!map.get("cloth_colour").isEmpty()){
-            int size  =  map.get("cloth_colour").length();
-            Toast.makeText(getActivity(), "THis is not a cloth size "+map.get("cloth_colour").length(), Toast.LENGTH_SHORT).show();
-            for (int cl=0;cl<map.get("cloth_colour").length();cl++)
-            {
-                if(cl==0)
-                {
-                    strinx =  map.get("cloth_colour").toString().substring(thisposition,cl);
-                }else {
-                    if(!strinx.isEmpty()) {
-                        if (!strinx.contains(",") &&!(cl == map.get("cloth_colour").length()-1) ) {
-                            strinx = map.get("cloth_colour").substring(thisposition, cl);
-                        } else {
-                            if(!(cl == map.get("cloth_colour").length()-1) ) {
-                                strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                ColoursList.add(strinx);
-                                Log.e("Colour if uis", "" + strinx);
-                                //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                thisposition = cl - 1;
-                                //   cl = thisposition;
-                                strinx = "";
-                            }else {
-                               // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
-                                strinx=  strinx + map.get("cloth_colour").substring(cl-1);
-                                ColoursList.add(strinx);
-                                Log.e("Colour else  uis", "" + map.get("cloth_colour").substring(cl-1));
-                                Log.e("Colour else strinx  uis", "" + strinx);
-                                //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                //thisposition = cl - 1;
-                                //   cl = thisposition;
-                                strinx = "";
+        try {
+            if (!cloth_colour.equals("no")) {
+                int size =cloth_colour.length();
+                Toast.makeText(getActivity(), "THis is not a cloth size " + cloth_colour.length(), Toast.LENGTH_SHORT).show();
+                for (int cl = 0; cl < map.get("colour").length(); cl++) {
+                    if (cl == 0) {
+                        strinx = cloth_colour.toString().substring(thisposition, cl);
+                    } else {
+                        if (!strinx.isEmpty()) {
+                            if (!strinx.contains(",") && !(cl == cloth_colour.length() - 1)) {
+                                strinx = cloth_colour.substring(thisposition, cl);
+                            } else {
+                                if (!(cl == map.get("colour").length() - 1)) {
+                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                    ColoursList.add(strinx);
+                                    Log.e("Colour if uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    thisposition = cl - 1;
+                                    //   cl = thisposition;
+                                    strinx = "";
+                                } else {
+                                    // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
+                                    strinx = strinx + map.get("colour").substring(cl - 1);
+                                    ColoursList.add(strinx);
+                                    Log.e("Colour else  uis", "" +cloth_colour.substring(cl - 1));
+                                    Log.e("Colour else strinx  uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    //thisposition = cl - 1;
+                                    //   cl = thisposition;
+                                    strinx = "";
+                                }
                             }
-                        }
-                    }else {
-                        strinx = map.get("cloth_colour").substring(thisposition, cl);
-                        cl=thisposition;
+                        } else {
+                            strinx = cloth_colour.substring(thisposition, cl);
+                            cl = thisposition;
 
+                        }
                     }
-                }
 
 //                cl++;
-            }
+                }
 
-            strinx="";
-            thisposition =0;
-            colours_adapter = new Colours_Adapter(getActivity() , ColoursList);
-            procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            procolour.setAdapter(colours_adapter);
-            //Colour is size??????????????????????????????????????????
-        }else   if(!map.get("s_colour").isEmpty()) {
+                strinx = "";
+                thisposition = 0;
+                colours_adapter = new Colours_Adapter(getActivity(), ColoursList);
+                procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+                procolour.setAdapter(colours_adapter);
+                //shoe Colour is size??????????????????????????????????????????
+            } else if (!shoe_size.equals("no")) {
 //            int size  =  map.get("s_colour").length();
 //            for(int px=0;px<map.get("s_colour").length();px++)
 //            {
@@ -196,40 +238,38 @@ public class Show_pro_detail_fragment extends Fragment {
 //
 //              }
 //            }
-            Toast.makeText(getActivity(), "THis is not a cloth size "+map.get("s_colour").length(), Toast.LENGTH_SHORT).show();
-            for (int cl=0;cl<=map.get("s_colour").length();cl++)
-            {
-                if(cl==0)
-                {
-                    strinx =  map.get("s_colour").toString().substring(thisposition,cl);
-                }else {
-                    if(!strinx.isEmpty()) {
-                        if (!strinx.contains(",") &&!(cl == map.get("s_colour").length()-1) ) {
-                            strinx = map.get("s_colour").substring(thisposition, cl);
-                        } else {
-                            if(!(cl == map.get("s_colour").length()) ) {
-                                if(!strinx.contains(",")) {
-                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                    SizesList.add(strinx);
-                                    Log.e("s_size if uis", "" + strinx);
-                                }else {
-                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                    SizesList.add(strinx);
-                                    Log.e("s_size if uis", "" + strinx);
-                                    strinx ="";
-                                    thisposition = cl-1;
+                Toast.makeText(getActivity(), "THis is not a cloth size " + shoe_size.length(), Toast.LENGTH_SHORT).show();
+                for (int cl = 0; cl <= shoe_size.length(); cl++) {
+                    if (cl == 0) {
+                        strinx = shoe_size.toString().substring(thisposition, cl);
+                    } else {
+                        if (!strinx.isEmpty()) {
+                            if (!strinx.contains(",") && !(cl == shoe_size.length() - 1)) {
+                                strinx = shoe_size.substring(thisposition, cl);
+                            } else {
+                                if (!(cl == shoe_size.length())) {
+                                    if (!strinx.contains(",")) {
+                                        strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                        SizesList.add(strinx);
+                                        Log.e("s_size if uis", "" + strinx);
+                                    } else {
+                                        strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                        SizesList.add(strinx);
+                                        Log.e("s_size if uis", "" + strinx);
+                                        strinx = "";
+                                        thisposition = cl - 1;
 //                                    cl=cl-2;
-                                }
-                                //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    }
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
 
 
-                                //   cl = thisposition;
-                                strinx = "";
-                            }else {
-                                // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
-                              //  strinx=  strinx + map.get("s_colour").substring(cl-1);
-                                strinx=  strinx + map.get("s_colour").substring(cl-1);
-                                SizesList.add(strinx);
+                                    //   cl = thisposition;
+                                    strinx = "";
+                                } else {
+                                    // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
+                                    //  strinx=  strinx + map.get("s_colour").substring(cl-1);
+                                    strinx = strinx + shoe_size.substring(cl - 1);
+                                    SizesList.add(strinx);
 //                                if(strinx.contains(",")) {
 //                                    strinx =  map.get("s_colour").substring(thisposition,cl-2);
 //                                    SizesList.add(strinx);
@@ -240,176 +280,177 @@ public class Show_pro_detail_fragment extends Fragment {
 //                                    SizesList.add(strinx);
 //                                    Log.e("s_size else strinx  uis", "" + strinx);
 //                                }
-                           //     SizesList.add(strinx);
-                                Log.e("s_size else  uis", "" + map.get("s_colour").substring(cl-1));
-                                Log.e("s_size else strinx  uis", "" + strinx);
-                                //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                             //   thisposition = cl - 1;
-                                //   cl = thisposition;
-                                strinx = "";
+                                    //     SizesList.add(strinx);
+                                    Log.e("s_size else  uis", "" + map.get("colour").substring(cl - 1));
+                                    Log.e("s_size else strinx  uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    //   thisposition = cl - 1;
+                                    //   cl = thisposition;
+                                    strinx = "";
 //                                SizesList.add("White");
+                                }
                             }
-                        }
-                    }else {
-                        strinx = map.get("s_colour").substring(thisposition, cl);
-                      //  cl=thisposition;
-                        if(thisposition ==0) {
-                            thisposition = cl - 1;
-                        }else {
-                            thisposition = cl - 2;
-                        }
-
-                    }
-                }
-
-//                cl++;
-            }
-        if(map.get("s_colour").contains("10"))
-        {
-            SizesList.add("10");
-
-        }if(map.get("s_colour").contains("11"))
-            {
-                SizesList.add("11");
-            }if(map.get("s_colour").contains("12"))
-            {
-                SizesList.add("12");
-            }if(map.get("s_colour").contains("13"))
-            {
-                SizesList.add("13");
-            }if(map.get("s_colour").contains("14"))
-            {
-                SizesList.add("14");
-            }if(map.get("s_colour").contains("15"))
-            {
-                SizesList.add("15");
-            }
-            strinx="";
-            thisposition =0;
-            sizesAdapter = new SizesAdapter(getActivity() , SizesList);
-            shoesizesc.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            shoesizesc.setAdapter(sizesAdapter);
-        }
-        //it is a color
-         if(!map.get("s_size").isEmpty()){
-            int size  =  map.get("s_size").length();
-            Toast.makeText(getActivity(), "THis is not a cloth size "+map.get("cloth_colour").length(), Toast.LENGTH_SHORT).show();
-            for (int cl=0;cl<map.get("s_size").length();cl++)
-            {
-                if(cl==0)
-                {
-                    strinx =  map.get("s_size").toString().substring(thisposition,cl);
-                }else {
-                    if(!strinx.isEmpty()) {
-                        if (!strinx.contains(",") &&!(cl == map.get("s_size").length()-1) ) {
-                            strinx = map.get("s_size").substring(thisposition, cl);
                         } else {
-                            if(!(cl == map.get("s_size").length()-1) ) {
-                                strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                ColoursList.add(strinx);
-                                Log.e("s_size if uis", "" + strinx);
-                                //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                thisposition = cl;
-                                //   cl = thisposition;
-                                strinx = "";
-                            }else {
-                                // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
-                                strinx=  strinx + map.get("s_size").substring(cl-1);
-                                ColoursList.add(strinx);
-                               // SizesList.add(strinx);
-                                Log.e("s_size else  uis", "" + map.get("s_size").substring(cl-1));
-                                Log.e("s_size else strinx  uis", "" + strinx);
-                                //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                //thisposition = cl - 1;
-                                //   cl = thisposition;
-                                strinx = "";
-//                                SizesList.add("White");
+                            strinx = shoe_size.substring(thisposition, cl);
+                            //  cl=thisposition;
+                            if (thisposition == 0) {
+                                thisposition = cl - 1;
+                            } else {
+                                thisposition = cl - 2;
                             }
+
                         }
-                    }else {
-
-                        strinx = map.get("s_size").substring(thisposition, cl);
-//                        cl=thisposition;
-                        if(thisposition ==0) {
-                            thisposition = cl - 1;
-                        }else {
-                            thisposition = cl - 2;
-                        }
-
-
                     }
+
+//                cl++;
+                }
+                if (shoe_size.contains("10")) {
+                    SizesList.add("10");
+
+                }
+                if (shoe_size.contains("11")) {
+                    SizesList.add("11");
+                }
+                if (shoe_size.contains("12")) {
+                    SizesList.add("12");
+                }
+                if (shoe_size.contains("13")) {
+                    SizesList.add("13");
+                }
+                if (shoe_size.contains("14")) {
+                    SizesList.add("14");
+                }
+                if ( shoe_size.contains("15")) {
+                    SizesList.add("15");
+                }
+                strinx = "";
+                thisposition = 0;
+                sizesAdapter = new SizesAdapter(getActivity(), SizesList);
+                shoesizesc.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+                shoesizesc.setAdapter(sizesAdapter);
+            }
+            //it is a  shoe color
+            if (!shoe_colour.equals("no")) {
+                int size = shoe_colour.length();
+                Toast.makeText(getActivity(), "THis is not a cloth size " + shoe_colour.length(), Toast.LENGTH_SHORT).show();
+                for (int cl = 0; cl < shoe_colour.length(); cl++) {
+                    if (cl == 0) {
+                        strinx = shoe_colour.toString().substring(thisposition, cl);
+                    } else {
+                        if (!strinx.isEmpty()) {
+                            if (!strinx.contains(",") && !(cl == shoe_colour.length() - 1)) {
+                                strinx = shoe_colour.substring(thisposition, cl);
+                            } else {
+                                if (!(cl == shoe_colour.length() - 1)) {
+                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                    ColoursList.add(strinx);
+                                    Log.e("s_size if uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    thisposition = cl;
+                                    //   cl = thisposition;
+                                    strinx = "";
+                                } else {
+                                    // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
+                                    strinx = strinx + shoe_colour.substring(cl - 1);
+                                    ColoursList.add(strinx);
+                                    // SizesList.add(strinx);
+                                    Log.e("s_size else  uis", "" + shoe_colour.substring(cl - 1));
+                                    Log.e("s_size else strinx  uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    //thisposition = cl - 1;
+                                    //   cl = thisposition;
+                                    strinx = "";
+//                                SizesList.add("White");
+                                }
+                            }
+                        } else {
+
+                            strinx = shoe_colour.substring(thisposition, cl);
+//                        cl=thisposition;
+                            if (thisposition == 0) {
+                                thisposition = cl - 1;
+                            } else {
+                                thisposition = cl - 2;
+                            }
+
+
+                        }
+                    }
+
+//                cl++;
                 }
 
+                strinx = "";
+                thisposition = 0;
+                colours_adapter = new Colours_Adapter(getActivity(), ColoursList);
+                procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+                procolour.setAdapter(colours_adapter);
+            } else if (!cloth_size.equals("no")) {
+                int size = cloth_size.length();
+                Toast.makeText(getActivity(), "THis is not a cloth size " + cloth_size.length(), Toast.LENGTH_SHORT).show();
+                for (int cl = 0; cl < cloth_size.length(); cl++) {
+
+                    if (cl == 0) {
+                        strinx = cloth_size.toString().substring(thisposition, cl);
+                    } else {
+                        if (!strinx.isEmpty()) {
+                            if (!strinx.contains(",") && !(cl == cloth_size.length() - 1)) {
+                                strinx = cloth_size.substring(thisposition, cl);
+                            } else {
+                                if (!(cl ==cloth_size.length() - 1)) {
+
+                                    strinx = strinx.subSequence(0, strinx.length() - 1).toString();
+                                    SizesList.add(strinx);
+                                    Log.e("cloth_size if uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    //    thisposition = cl - 1;
+                                    thisposition = cl - 1;
+                                    //   cl = thisposition;
+                                    strinx = "";
+                                } else {
+                                    // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
+                                    strinx = strinx + cloth_size.substring(cl - 1);
+                                    SizesList.add(strinx);
+//                                     SizesList.add(strinx);
+                                    Log.e("s_size else  uis", "" + cloth_size.substring(cl - 1));
+                                    Log.e("s_size else strinx  uis", "" + strinx);
+                                    //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
+                                    //thisposition = cl - 1;
+                                    //   cl = thisposition;
+                                    strinx = "";
+//                                SizesList.add("White");
+                                }
+                            }
+                        } else {
+                            strinx = cloth_size.substring(thisposition, cl);
+                            //      cl=thisposition;
+                            //       SizesList.add(strinx);
+//                            thisposition=cl-1;
+                            if (thisposition == 0) {
+                                thisposition = cl - 1;
+
+                            } else {
+                                thisposition = cl - 2;
+                            }
+                        }
+                    }
+
 //                cl++;
+                }
+
+                sizesAdapter = new SizesAdapter(getActivity(), SizesList);
+                shoesizesc.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+                shoesizesc.setAdapter(sizesAdapter);
             }
 
-             strinx="";
-             thisposition =0;
-             colours_adapter = new Colours_Adapter(getActivity() , ColoursList);
-             procolour.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-             procolour.setAdapter(colours_adapter);
-        } else
-             if(!map.get("cloth_size").isEmpty()){
-                 int size  =  map.get("cloth_size").length();
-                 Toast.makeText(getActivity(), "THis is not a cloth size "+map.get("cloth_size").length(), Toast.LENGTH_SHORT).show();
-                 for (int cl=0;cl<map.get("cloth_size").length();cl++)
-                 {
 
-                     if(cl==0)
-                     {
-                         strinx =  map.get("cloth_size").toString().substring(thisposition,cl);
-                     }else {
-                         if(!strinx.isEmpty()) {
-                             if (!strinx.contains(",") &&!(cl == map.get("cloth_size").length()-1) ) {
-                                 strinx = map.get("cloth_size").substring(thisposition, cl);
-                             } else {
-                                 if(!(cl == map.get("cloth_size").length()-1) ) {
+            Log.e("cloth_colour COlour is", "" +cloth_size);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-                                     strinx = strinx.subSequence(0, strinx.length() - 1).toString();
-                                     SizesList.add(strinx);
-                                     Log.e("cloth_size if uis", "" + strinx);
-                                     //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                 //    thisposition = cl - 1;
-                                     thisposition = cl-1;
-                                     //   cl = thisposition;
-                                     strinx = "";
-                                 }else {
-                                     // strinx = strinx.subSequence(0, strinx.length()).toString().concat( map.get("cloth_colour").substring(thisposition, map.get("cloth_colour").length()-1));
-                                     strinx=  strinx + map.get("cloth_size").substring(cl-1);
-                                     SizesList.add(strinx);
-//                                     SizesList.add(strinx);
-                                     Log.e("s_size else  uis", "" + map.get("cloth_size").substring(cl-1));
-                                     Log.e("s_size else strinx  uis", "" + strinx);
-                                     //   Toast.makeText(getActivity(), "" + ColoursList.get(cl), Toast.LENGTH_SHORT).show();
-                                     //thisposition = cl - 1;
-                                     //   cl = thisposition;
-                                     strinx = "";
-//                                SizesList.add("White");
-                                 }
-                             }
-                         }else {
-                             strinx = map.get("cloth_size").substring(thisposition, cl);
-                      //      cl=thisposition;
-                      //       SizesList.add(strinx);
-//                            thisposition=cl-1;
-                             if(thisposition ==0) {
-                                 thisposition = cl - 1;
-                             }else {
-                                 thisposition = cl - 2;
-                             }
-                         }
-                     }
-
-//                cl++;
-                 }
-
-                 sizesAdapter = new SizesAdapter(getActivity() , SizesList);
-                 shirtsizesc.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-                 shirtsizesc.setAdapter(sizesAdapter);
-             }
-
-
-        Log.e("cloth_colour COlour is" , ""+map.get("cloth_colour"));
+             //++++++++++++++++++++++++++++++end of  sizes+++++++++++++++++++++++++++++++++++++++
         tv_emi.setText(map.get("EMI"));
         tv_waranty.setText(map.get("Warantee"));
         tv_offer_desc.setText(map.get("p_offer_description"));
@@ -440,7 +481,12 @@ public class Show_pro_detail_fragment extends Fragment {
                 .dontAnimate()
                 .into(offer_image);
 
-
+        offer_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage( map.get("product_offer_image"));
+            }
+        });
 
         Glide.with(getActivity())
                 .load(R.drawable.spe_offer)

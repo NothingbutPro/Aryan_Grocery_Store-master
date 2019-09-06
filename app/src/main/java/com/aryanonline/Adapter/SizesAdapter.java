@@ -13,6 +13,8 @@ import com.aryanonline.R;
 
 import java.util.ArrayList;
 
+import static com.aryanonline.Fragment.Show_pro_detail_fragment.size_sel;
+
 public class SizesAdapter  extends RecyclerView.Adapter<SizesAdapter.ViewHolder>  {
     private static final String TAG = "DealsAdapter";
     private ArrayList<String> dealList;
@@ -56,6 +58,16 @@ public class SizesAdapter  extends RecyclerView.Adapter<SizesAdapter.ViewHolder>
     public void onBindViewHolder(final SizesAdapter.ViewHolder viewHolder, final int position) {
         String Colour = dealList.get(position);
             viewHolder.size_id.setText(Colour);
+            if(position==0)
+            {
+                size_sel.setText(dealList.get(position));
+            }
+            viewHolder.size_id.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    size_sel.setText( dealList.get(position));
+                }
+            });
 
     }
 

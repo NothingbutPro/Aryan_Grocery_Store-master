@@ -3,6 +3,7 @@ package com.aryanonline.Adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(holder.iv_logo);
-
+        Log.e("map has adapter" ,""+ map.get("cloth_size"));
         holder.tv_title.setText(map.get("product_name"));
         holder.tv_price.setText(map.get("unit_value") + " " +
                 map.get("unit") +" "+activity.getResources().getString(R.string.currency)+" "+ map.get("price"));

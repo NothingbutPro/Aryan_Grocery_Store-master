@@ -2,7 +2,8 @@
 
     <string name="app_name">Aryan Store</string>
 
-    <string name="currency">INR\u0020</string>
+    <string name="currency">RS\u0020</string>
+<!--    <string name="currency">INR\u0020</string>-->
     <string name="title_activity_main">Aryan Store</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -47,7 +48,7 @@
     <!-- fragment_cart.xml -->
     <string name="tv_cart_title">Cart</string>
     <string name="tv_cart_clear">Clear All Product</string>
-    <string name="tv_cart_checkout">Continue Checkout</string>
+    <string name="tv_cart_checkout">Continue To Checkout</string>
     <string name="tv_cart_total">Total:\u0020</string>
     <string name="tv_cart_item">Items:\u0020</string>
     <string name="tv_cart_rs">\u0020Rs</string>

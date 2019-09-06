@@ -110,6 +110,12 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("unit", modelList.get(position).getUnit());
                 map.put("Mrp", modelList.get(position).getMrp());
                 map.put("unit_value", modelList.get(position).getUnitValue());
+                map.put("cloth_colour", modelList.get(position).getCloth_color());
+                map.put("cod", modelList.get(position).getCod());
+                map.put("s_colour", modelList.get(position).getS_clolor());
+                Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
+                map.put("s_size", modelList.get(position).getS_size());
+                map.put("cloth_size", modelList.get(position).getCloth_size());
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
@@ -244,8 +250,9 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         holder.tv_title.setText(mList.getProductName());
         holder.mrpPrice.setText(mList.getMrp());
-        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnitValue() + " " +
-                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
+//        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnitValue() + " " +
+//                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
+        holder.tv_price.setText(" " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
 
         if (dbcart.isInCart(mList.getProductId())) {
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
@@ -380,7 +387,12 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("product_image", modelList.get(position).getProductImage());
                 map.put("increament", modelList.get(position).getIncreament());
                 map.put("product_name", modelList.get(position).getProductName());
-
+                map.put("cloth_colour", modelList.get(position).getCloth_color());
+                map.put("cod", modelList.get(position).getCod());
+                map.put("s_colour", modelList.get(position).getS_clolor());
+                Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
+                map.put("s_size", modelList.get(position).getS_size());
+                map.put("cloth_size", modelList.get(position).getCloth_size());
                 map.put("price", modelList.get(position).getPrice());
                 map.put("stock", modelList.get(position).getInStock());
                 map.put("title", modelList.get(position).getTitle());

@@ -89,6 +89,12 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         ArrayList<HashMap<String, String>> map = db.getCartAll();
 
         Cart_adapter adapter = new Cart_adapter(getActivity(), map);
+//        Log.e("color is" , "")
+        for(int p=0;p<adapter.getItemCount();p++)
+        {
+            Log.e("map has" ,""+ map.get(p).get("cloth_size"));
+        }
+
         rv_cart.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

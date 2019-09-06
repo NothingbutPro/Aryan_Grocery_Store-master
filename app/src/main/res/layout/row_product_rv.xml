@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:text="TextView"
-                android:textSize="@dimen/space_13" />
+                android:textSize="28dp" />
 
 
             <LinearLayout

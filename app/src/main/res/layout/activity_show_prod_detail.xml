@@ -25,7 +25,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="#fff"-->
+<!--                    android:elevation="4dp"-->
+<!--                    android:orientation="vertical">-->
 
+                    <TextView
+                        android:padding="2dp"
+                        android:id="@+id/tv_prod_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text=" "
+                        android:textColor="#000"
+                        android:textSize="20dp" />
+
+<!--                </LinearLayout>-->
                 <ImageView
                     android:id="@+id/iv_special_offer"
                     android:layout_width="80dp"
@@ -33,28 +50,15 @@
                     android:src="@drawable/spe_offer"
                     android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/tvSubscription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/back_rounded_color"
-                    android:drawableLeft="@drawable/special_offf"
-                    android:drawablePadding="5dp"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="20% off"
-                    android:textColor="#000"
-                    android:textSize="14sp" />
+
 
                 <RelativeLayout
+
                     android:elevation="4dp"
                     android:background="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="90dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -62,7 +66,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         app:srcCompat="@drawable/shop" />
-
+                    <TextView
+                        android:id="@+id/tvSubscription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/back_rounded_color"
+                        android:drawableLeft="@drawable/special_offf"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="20% off"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -186,18 +204,47 @@
 
 
             <LinearLayout
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff"
                 android:elevation="4dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/prod_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="Product HighLight:"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Selected"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/colour_sel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Product"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/size_sel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Product"
                     android:textColor="#000"
                     android:textSize="13dp"
                     android:textStyle="bold" />
@@ -334,6 +381,7 @@
 
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -390,7 +438,7 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -435,7 +483,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_prod_desc"
+                    android:id="@+id/tv_prod_desc23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -464,8 +512,9 @@
                     android:orientation="horizontal"
                     android:weightSum="1">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/waryxt"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="0.5"
@@ -473,7 +522,16 @@
                         android:textColor="#000"
                         android:textSize="13dp"
                         android:textStyle="bold" />
-
+                    <Button
+                        android:id="@+id/replacetxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5"
+                        android:text="Replacement:"
+                        android:textColor="#000"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -491,6 +549,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_waranty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -578,6 +637,60 @@
                     android:textColor="#000"
                     android:textSize="13dp" />
             </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.5"
+                    android:text="EMI Option"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <Button
+
+                        android:id="@+id/pro_emi2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corner_textview"
+                        android:text="EMI Option"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/addrev_rec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.5"
+                android:text="Warranty 1 year manufacture and 6 month products"
+                android:textColor="#000"
+                android:textSize="13dp" />
 
         </LinearLayout>
 

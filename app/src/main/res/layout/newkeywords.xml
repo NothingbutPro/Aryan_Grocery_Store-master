@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:elevation="4dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.95"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:padding="5dp"
+                    android:background="#fff"
+                    android:id="@+id/addtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Add Title(ex Neck Type)"
+                    android:textColor="#000"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/adddes"
+                    android:textSize="14dp"
+                    android:padding="15dp"
+                    android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Add Description(ex C)"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <Button
+
+                    android:background="@color/black"
+                    android:id="@+id/addnewf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="8dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:gravity="center"
+                    android:text="Post"
+                    android:textColor="#ffff" />
+
+
+<!--                <Button-->
+<!--                    android:visibility="gone"-->
+<!--                    android:drawableRight="@android:drawable/button_onoff_indicator_on"-->
+<!--                    android:id="@+id/removenew"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="28dp"-->
+<!--                    android:textSize="8dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="Remove"-->
+<!--                    android:textColor="#235E79" />-->
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#777575"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp">
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:background="?android:attr/selectableItemBackground"-->
+    <!--android:clickable="true"-->
+    <!--android:focusable="true"-->
+    <!--android:orientation="vertical">-->
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:layout_margin="5dp"-->
+    <!--app:cardMaxElevation="10dp"-->
+    <!--android:elevation="10dp"-->
+    <!--app:cardCornerRadius="10dp"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<LinearLayout-->
+    <!--android:layout_margin="3dp"-->
+    <!--android:padding="0dp"-->
+    <!--android:weightSum="1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="85dp"-->
+    <!--android:orientation="horizontal">-->
+    <!--<ImageView-->
+    <!--android:id="@+id/manu_img"-->
+    <!--android:src="@drawable/briefcase"-->
+    <!--android:layout_weight="0.4"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp" />-->
+    <!--<LinearLayout-->
+    <!--android:layout_weight="0.3"-->
+    <!--android:weightSum="1"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:layout_weight="0"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<TextView-->
+    <!--android:padding="1dp"-->
+    <!--android:id="@+id/mname"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentTop="true"-->
+
+    <!--android:textSize="16dp"-->
+    <!--android:textStyle="bold" />-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:elevation="10dp"-->
+    <!--app:cardMaxElevation="10dp"-->
+    <!--android:layout_weight="0.50"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<TextView-->
+
+    <!--android:id="@+id/bra_bus"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/title" />-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--</LinearLayout>-->
+    <!--&lt;!&ndash;<android.support.v7.widget.CardView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_weight="0.4"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:padding="10dp"-->
+    <!--android:orientation="vertical"-->
+    <!--android:weightSum="1"-->
+    <!--android:layout_weight="0.3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<Button-->
+    <!--android:textColor="#fff"-->
+    <!--android:layout_weight="0.50"-->
+    <!--android:id="@+id/conbtn"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/profile_circular_border_imageview"-->
+    <!--android:text="Connect" />-->
+
+
+    <!--<Button-->
+    <!--android:textColor="#fff"-->
+    <!--android:layout_weight="0.50"-->
+    <!--android:id="@+id/disscon"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/profile_circular_border_imageview"-->
+    <!--android:text="Disconnect" />-->
+    <!--</LinearLayout>-->
+    <!--&lt;!&ndash;</android.support.v7.widget.CardView>&ndash;&gt;-->
+    <!--</LinearLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--</RelativeLayout>-->

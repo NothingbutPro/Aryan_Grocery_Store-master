@@ -33,6 +33,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_INCREAMENT = "increament";
     public static final String COLUMN_STOCK = "stock";
     public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_COLOUR = "colour";
+    public static final String COLUMN_SIZE = "size";
 
     public DatabaseHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -53,7 +55,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_UNIT + " TEXT NOT NULL, "
                 + COLUMN_INCREAMENT + " DOUBLE NOT NULL, "
                 + COLUMN_STOCK + " DOUBLE NOT NULL, "
-                + COLUMN_TITLE + " TEXT NOT NULL "
+                + COLUMN_TITLE + " TEXT NOT NULL ,"
+                + COLUMN_COLOUR + " TEXT NOT NULL, "
+                + COLUMN_SIZE + " TEXT NOT NULL "
                 + ")";
 
         db.execSQL(exe);
@@ -79,6 +83,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_TITLE, map.get(COLUMN_TITLE));
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
+            values.put(COLUMN_COLOUR, map.get(COLUMN_COLOUR));
+            values.put(COLUMN_SIZE, map.get(COLUMN_SIZE));
 
             db.insert(CART_TABLE, null, values);
             return true;
