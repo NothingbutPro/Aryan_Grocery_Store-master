@@ -1,7 +1,9 @@
 package com.aryanonline.Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,16 +33,22 @@ import com.aryanonline.Config.BaseURL;
 import com.aryanonline.AppController;
 import com.aryanonline.MainActivity;
 import com.aryanonline.R;
+import com.aryanonline.util.AppPreference;
 import com.aryanonline.util.ConnectivityReceiver;
 import com.aryanonline.util.CustomVolleyJsonRequest;
 import com.aryanonline.util.DatabaseHandler;
 import com.aryanonline.util.Session_management;
 
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstapayListener;
+
+import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
+
 
 public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
-
+    public static String pay_status = "Fail";
     private TextView tv_timeslot, tv_address, tv_item, tv_total,tv_pay_total;
     private Button btn_order;
     RadioButton radio_online_pay,radio_offline_pay,radio_emi_pay;
@@ -153,13 +161,10 @@ public class Delivery_payment_detail_fragment extends Fragment {
                             ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
                         }
                     }else if (radio_online_pay.isChecked()){
-                        Payment_method=radio_online_pay.getText().toString();
-                        Toast.makeText(getActivity(), "Online Payment Success", Toast.LENGTH_SHORT).show();
-                        if (ConnectivityReceiver.isConnected()) {
-                            attemptOrder();
-                        } else {
-                            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
-                        }
+                        //db_cart.getTotalAmount()
+                        callInstamojoPay(new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_EMAIL), AppPreference.getMobile(getActivity()) , "10","Online buying",new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_NAME));
+
+
                     }else {
                         Payment_method=radio_emi_pay.getText().toString();
 
@@ -185,6 +190,60 @@ public class Delivery_payment_detail_fragment extends Fragment {
         return view;
     }
 
+    //++++++++++++++++++++++++++++++++++++++Instamojo
+    private void callInstamojoPay(String email, String phone, String amount, String purpose, String buyername) {
+        final Activity activity = getActivity();
+        Payment_method=radio_online_pay.getText().toString();
+        InstamojoPay instamojoPay = new InstamojoPay();
+        IntentFilter filter = new IntentFilter("ai.devsupport.instamojo");
+        getActivity().registerReceiver(instamojoPay, filter);
+        JSONObject pay = new JSONObject();
+        try {
+            pay.put("email", email);
+            pay.put("phone", phone);
+            pay.put("purpose", purpose);
+            pay.put("amount", amount);
+            pay.put("name", buyername);
+            pay.put("send_sms", true);
+            pay.put("send_email", true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        initListener();
+        instamojoPay.start(activity, pay, listener);
+    }
+
+    InstapayListener listener;
+//
+//
+//    InstapayListener listener;
+
+
+    private void initListener() {
+        listener = new InstapayListener() {
+            @Override
+            public void onSuccess(String response) {
+                pay_status = "Success";
+                Toast.makeText(getActivity().getApplicationContext(), response, Toast.LENGTH_LONG)
+                        .show();
+                Toast.makeText(getActivity(), "Online Payment Success", Toast.LENGTH_SHORT).show();
+                if (ConnectivityReceiver.isConnected()) {
+                    attemptOrder();
+                } else {
+                    ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String reason) {
+                Toast.makeText(getActivity().getApplicationContext(), "Failed: " + reason, Toast.LENGTH_LONG)
+                        .show();
+                Toast.makeText(getActivity(), "Having Problems", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    //+++++++++++++++++++++++++++++
     private void attemptOrder() {
 
         // retrive data from cart database
@@ -199,9 +258,15 @@ public class Delivery_payment_detail_fragment extends Fragment {
                 try {
                     jObjP.put("product_id", map.get("product_id"));
                     jObjP.put("qty", map.get("qty"));
+                    jObjP.put("product_name", map.get("product_name"));
+                    Log.e("Colour is",""+map.get("colour"));
+                    Log.e("Size is " , ""+map.get("size"));
                     jObjP.put("unit_value", map.get("unit_value"));
                     jObjP.put("unit", map.get("unit"));
                     jObjP.put("price", map.get("price"));
+                    jObjP.put("size", map.get("size"));
+                    Log.e("color", map.get("colour"));
+                    jObjP.put("color", map.get("colour"));
 
                     passArray.put(jObjP);
                 } catch (JSONException e) {
@@ -250,13 +315,14 @@ public class Delivery_payment_detail_fragment extends Fragment {
                     if (status) {
 
                         String msg = response.getString("data");
-
+                        promodecolourandsizeList.clear();
                         db_cart.clearCart();
                         ((MainActivity) getActivity()).setCartCounter("" + db_cart.getCartCount());
 
                         Bundle args = new Bundle();
                         Fragment fm = new Thanks_fragment();
                         args.putString("msg", msg);
+                        promodecolourandsizeList.clear();
                         fm.setArguments(args);
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)

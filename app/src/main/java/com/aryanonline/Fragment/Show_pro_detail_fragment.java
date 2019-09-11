@@ -58,7 +58,7 @@ public class Show_pro_detail_fragment extends Fragment {
     int thisposition =0;
     Colours_Adapter colours_adapter;
     SizesAdapter sizesAdapter;
-    public static  TextView colour_sel ,size_sel;
+    public static  TextView colour_sel ,size_sel,colour_sel2 ,size_sel2;
     public Show_pro_detail_fragment() {
         // Required empty public constructor
     }
@@ -80,6 +80,8 @@ public class Show_pro_detail_fragment extends Fragment {
         add_to_cart=view.findViewById(R.id.add_to_cart);
         waryxt=view.findViewById(R.id.waryxt);
         replacetxt=view.findViewById(R.id.replacetxt);
+        colour_sel2=view.findViewById(R.id.colour_sel2);
+        size_sel2=view.findViewById(R.id.size_sel2);
         prod_img=view.findViewById(R.id.prod_img);
         prod_name=view.findViewById(R.id.prod_name);
         colour_sel=view.findViewById(R.id.colour_sel);

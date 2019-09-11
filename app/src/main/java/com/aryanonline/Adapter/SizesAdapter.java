@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aryanonline.R;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
 import static com.aryanonline.Fragment.Show_pro_detail_fragment.size_sel;
+import static com.aryanonline.Fragment.Show_pro_detail_fragment.size_sel2;
 
 public class SizesAdapter  extends RecyclerView.Adapter<SizesAdapter.ViewHolder>  {
     private static final String TAG = "DealsAdapter";
@@ -61,14 +63,28 @@ public class SizesAdapter  extends RecyclerView.Adapter<SizesAdapter.ViewHolder>
         viewHolder.size_id.setText(Colour);
         if(position==0)
         {
-
+            promodecolourandsizeList.get(position).setSize(dealList.get(position));
             size_sel.setText(dealList.get(position));
+            size_sel2.setText(dealList.get(position));
         }
         viewHolder.size_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                promodecolourandsizeList.get(position).setSize(dealList.get(position));
-                size_sel.setText( dealList.get(position));
+
+                try {
+
+
+//                    if (promodecolourandsizeList.get(position) != null) {
+                      //  promodecolourandsizeList.get(position).setSize(dealList.get(position));
+                        size_sel.setText(dealList.get(position));
+                        size_sel2.setText(dealList.get(position));
+//                    }
+                }catch (Exception e)
+                {
+                    size_sel.setText(dealList.get(position));
+                    Toast.makeText(context, "it isd null", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         });
 

@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
 import static com.aryanonline.Fragment.Show_pro_detail_fragment.colour_sel;
+import static com.aryanonline.Fragment.Show_pro_detail_fragment.colour_sel2;
 
 public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewHolder>  {
     private static final String TAG = "DealsAdapter";
@@ -77,6 +78,7 @@ public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewH
             {
                 promodecolourandsizeList.get(position).setColour(String.valueOf(Color.parseColor(Colour)));
                 colour_sel.setText(dealList.get(0));
+                colour_sel2.setText(dealList.get(0));
                 colour_sel.setBackgroundColor(Color.parseColor(Colour));
             }
         }catch (Exception e)
@@ -88,6 +90,7 @@ public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewH
             public void onClick(View v) {
 
                 colour_sel.setText(dealList.get(position));
+                colour_sel2.setText(dealList.get(position));
             }
         });
 

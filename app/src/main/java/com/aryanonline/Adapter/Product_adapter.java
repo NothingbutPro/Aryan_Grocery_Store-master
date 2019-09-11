@@ -270,7 +270,12 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnitValue() + " " +
 //                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
         holder.tv_price.setText(" " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
-        holder.tv_colournsize.setText("Selected Color "+promodecolourandsizeList.get(position).getColour()+" With "+promodecolourandsizeList.get(position).getSize());
+        try {
+            holder.tv_colournsize.setText("Selected Color " + promodecolourandsizeList.get(position).getColour() + " With " + promodecolourandsizeList.get(position).getSize());
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         if (dbcart.isInCart(mList.getProductId())) {
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
             holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProductId()));

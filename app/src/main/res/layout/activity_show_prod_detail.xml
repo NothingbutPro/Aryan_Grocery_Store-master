@@ -53,7 +53,7 @@
 
 
                 <RelativeLayout
-
+                    android:layout_below="@+id/tv_prod_desc"
                     android:elevation="4dp"
                     android:background="#fff"
                     android:layout_width="match_parent"
@@ -231,7 +231,7 @@
                     android:textSize="13dp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/colour_sel"
+                    android:id="@+id/colour_sel2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -240,7 +240,7 @@
                     android:textSize="13dp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/size_sel"
+                    android:id="@+id/size_sel2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -288,7 +288,8 @@
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/procolour"
@@ -296,7 +297,28 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Selected"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/colour_sel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Product"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
             </LinearLayout>
             <!-- For Sizes           -->
             <LinearLayout
@@ -336,15 +358,36 @@
                 <LinearLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/shoesizesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <TextView
 
-
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Selected"
+                        android:textColor="#000"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/size_sel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Product"
+                        android:textColor="#000"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 </android.support.v7.widget.CardView>

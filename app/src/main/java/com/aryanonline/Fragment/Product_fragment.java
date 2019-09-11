@@ -154,6 +154,8 @@ public class Product_fragment extends Fragment {
                         product_modelList = gson.fromJson(response.getJSONArray("data").toString(), listType);
                         Log.e("Product","after json"+response.getJSONArray("data").getJSONObject(0).getString("in_stock"));
                         product_modelList.clear();
+                        promodecolourandsizeList.clear();
+                        promodecolourandsizeList = new ArrayList<>(response.getJSONArray("data").length());
                         for(int p=0;p<response.getJSONArray("data").length();p++)
                         {
                             product_modelList.add(new Product_model(response.getJSONArray("data").getJSONObject(0).getString("product_id")
