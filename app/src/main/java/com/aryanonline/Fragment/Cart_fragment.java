@@ -44,6 +44,8 @@ import com.aryanonline.util.ConnectivityReceiver;
 import com.aryanonline.util.DatabaseHandler;
 import com.aryanonline.util.Session_management;
 
+import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
+
 
 public class Cart_fragment extends Fragment implements View.OnClickListener {
 
@@ -92,7 +94,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 //        Log.e("color is" , "")
         for(int p=0;p<adapter.getItemCount();p++)
         {
-            Log.e("map has" ,""+ map.get(p).get("cloth_size"));
+            Log.e("map has" ,""+ map.get(p).get("colour"));
         }
 
         rv_cart.setAdapter(adapter);
@@ -145,6 +147,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // clear cart data
                 db.clearCart();
+                promodecolourandsizeList.clear();
                 ArrayList<HashMap<String, String>> map = db.getCartAll();
 
                 Cart_adapter adapter = new Cart_adapter(getActivity(), map);
@@ -219,7 +222,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                                 }else {
                                     //Toast.makeText(getActivity(), "Please login or regiter.\n continue", Toast.LENGTH_SHORT).show();
 
-                                   Intent i = new Intent(getActivity(), LoginActivity.class);
+                                    Intent i = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(i);
 
 //                                    Intent i = new Intent(getActivity(), ContinueActivity.class);

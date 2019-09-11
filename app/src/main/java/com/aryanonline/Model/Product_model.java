@@ -39,6 +39,10 @@ public class Product_model implements Serializable {
     //+++++++++++++++++++++++++++++++++++++++clothers+++++++++++++++++++++++++
     private String s_clolor;
 
+
+
+    private String colour;
+    private String size;
     private String s_size;
     private String cloth_color;
     private String cloth_size;
@@ -84,6 +88,11 @@ public class Product_model implements Serializable {
         this.parent = parent;
     }
 
+    public Product_model(String colour, String size) {
+        this.colour = colour;
+        this.size = size;
+    }
+
     public String getpOfferDescription() {
         return pOfferDescription;
     }
@@ -91,7 +100,21 @@ public class Product_model implements Serializable {
     public void setpOfferDescription(String pOfferDescription) {
         this.pOfferDescription = pOfferDescription;
     }
+    public String getColour() {
+        return colour;
+    }
 
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
     public String getS_clolor() {
         return s_clolor;
     }

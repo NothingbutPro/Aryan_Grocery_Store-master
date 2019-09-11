@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Aryan_Grocery_Store-master.iml" filepath="$PROJECT_DIR$/Aryan_Grocery_Store-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ary911.iml" filepath="$PROJECT_DIR$/Ary911.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

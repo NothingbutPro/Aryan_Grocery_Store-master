@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,7 @@ public class Product_fragment extends Fragment {
     private List<String> cat_menu_id = new ArrayList<>();
 
     private List<Product_model> product_modelList = new ArrayList<>();
+    public static List<Product_model> promodecolourandsizeList = new ArrayList<>();
     private Product_adapter adapter_product;
 
     public Product_fragment() {
@@ -148,47 +150,62 @@ public class Product_fragment extends Fragment {
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
 
-                       // product_modelList = gson.fromJson(response.getString("data"), listType);
+                        // product_modelList = gson.fromJson(response.getString("data"), listType);
                         product_modelList = gson.fromJson(response.getJSONArray("data").toString(), listType);
                         Log.e("Product","after json"+response.getJSONArray("data").getJSONObject(0).getString("in_stock"));
                         product_modelList.clear();
                         for(int p=0;p<response.getJSONArray("data").length();p++)
                         {
-   product_modelList.add(new Product_model(response.getJSONArray("data").getJSONObject(0).getString("product_id")
-           ,response.getJSONArray("data").getJSONObject(p).getString("product_name"),
-           response.getJSONArray("data").getJSONObject(p).getString("product_description"),
-           response.getJSONArray("data").getJSONObject(p).getString("product_image"),
-           response.getJSONArray("data").getJSONObject(p).getString("category_id"),
-           response.getJSONArray("data").getJSONObject(p).getString("in_stock")
-           ,response.getJSONArray("data").getJSONObject(p).getString("price"),
-           response.getJSONArray("data").getJSONObject(p).getString("unit_value"),
-           response.getJSONArray("data").getJSONObject(p).getString("unit"),
-           response.getJSONArray("data").getJSONObject(p).getString("increament"),
-           response.getJSONArray("data").getJSONObject(p).getString("Mrp") ,
-           response.getJSONArray("data").getJSONObject(p).getString("today_deals"),
-           response.getJSONArray("data").getJSONObject(p).getString("offers_cat"),
-           response.getJSONArray("data").getJSONObject(p).getString("deals_description"),
-           response.getJSONArray("data").getJSONObject(p).getString("offers_cat_desc"),
-           response.getJSONArray("data").getJSONObject(p).getString("emi"),
-           response.getJSONArray("data").getJSONObject(p).getString("warranty"),
-           response.getJSONArray("data").getJSONObject(p).getString("product_offer_image"),
-           response.getJSONArray("data").getJSONObject(p).getString("p_offer_description"),
-           response.getJSONArray("data").getJSONObject(p).getString("top_product_status"),
-           response.getJSONArray("data").getJSONObject(p).getString("date"),
-           response.getJSONArray("data").getJSONObject(p).getString("offers_persent"),
-           response.getJSONArray("data").getJSONObject(p).getString("offers_warranty"),
-           response.getJSONArray("data").getJSONObject(p).getString("stock"),
-           response.getJSONArray("data").getJSONObject(p).getString("title"),
-           response.getJSONArray("data").getJSONObject(p).getString("parent"),
-           response.getJSONArray("data").getJSONObject(p).getString("s_clolor"),
-           response.getJSONArray("data").getJSONObject(p).getString("s_size"),
-           response.getJSONArray("data").getJSONObject(p).getString("cloth_color"),
-           response.getJSONArray("data").getJSONObject(p).getString("cloth_size"),
-           response.getJSONArray("data").getJSONObject(p).getString("replacement_policy"),
-           response.getJSONArray("data").getJSONObject(p).getString("cod")
-           ));
+                            product_modelList.add(new Product_model(response.getJSONArray("data").getJSONObject(0).getString("product_id")
+                                    ,response.getJSONArray("data").getJSONObject(p).getString("product_name"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("product_description"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("product_image"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("category_id"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("in_stock")
+                                    ,response.getJSONArray("data").getJSONObject(p).getString("price"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("unit_value"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("unit"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("increament"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("Mrp") ,
+                                    response.getJSONArray("data").getJSONObject(p).getString("today_deals"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("offers_cat"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("deals_description"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("offers_cat_desc"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("emi"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("warranty"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("product_offer_image"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("p_offer_description"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("top_product_status"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("date"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("offers_persent"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("offers_warranty"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("stock"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("title"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("parent"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("s_clolor"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("s_size"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("cloth_color"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("cloth_size"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("replacement_policy"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("cod")
+                            ));
+                            if(!response.getJSONArray("data").getJSONObject(p).getString("s_clolor").isEmpty() &&
+                                    !response.getJSONArray("data").getJSONObject(p).getString("s_size").isEmpty())
+                            {
+                                String sepelistcolor = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("s_clolor").split(",")).get(0).toString();
+                                String sepelistsize = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("s_size").split(",")).get(0).toString();
+                                promodecolourandsizeList.add(new Product_model(sepelistcolor,sepelistsize));
+                            }
+                            if(!response.getJSONArray("data").getJSONObject(p).getString("cloth_color").isEmpty()
+                                    &&  !response.getJSONArray("data").getJSONObject(p).getString("cloth_size").isEmpty()){
+                                String sepelistcolor1 = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("cloth_color").split(",")).get(0).toString();
+                                String sepelistsize1 = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("cloth_size").split(",")).get(0).toString();
+                                promodecolourandsizeList.add(new Product_model(sepelistcolor1,sepelistsize1));
+//       promodecolourandsizeList.add(new Product_model(response.getJSONArray("data").getJSONObject(p).getString("cloth_color").toString()
+//               ,response.getJSONArray("data").getJSONObject(p).getString("cloth_size")));
+                            }
                         }
-                     //   Log.e("product" , "json"+response.getJSONArray());
+                        //   Log.e("product" , "json"+response.getJSONArray());
                         adapter_product = new Product_adapter(product_modelList, getActivity());
                         rv_cat.setAdapter(adapter_product);
                         adapter_product.notifyDataSetChanged();

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.aryanonline.Adapter.Colours_Adapter;
 import com.aryanonline.Adapter.SizesAdapter;
 import com.aryanonline.Config.BaseURL;
 import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Product_model;
 import com.aryanonline.R;
 import com.aryanonline.Replacement_Activity;
 import com.aryanonline.Warranty_Activity;
@@ -35,14 +37,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
+
 public class Show_pro_detail_fragment extends Fragment {
     TextView add_to_cart,prod_buy_now,prod_name,tv_prod_price,tv_prod_desc,prod_in_stock,
             tv_emi,tv_waranty,tv_offer_desc;
+    //
     ImageView prod_img,iv_special_offer,offer_image;
     String shoe_colour ="no",cloth_colour = "no",cloth_size = "no",shoe_size = "no";
     ArrayList<String> ColoursList = new ArrayList<>();
     ArrayList<String> SizesList = new ArrayList<>();
-   // ArrayList<String> SizesList = new ArrayList<>();
+    // ArrayList<String> SizesList = new ArrayList<>();
     private DatabaseHandler dbcart;
     RecyclerView procolour ,shoesizesc,shirtsizesc;
     private Context context;
@@ -99,6 +104,7 @@ public class Show_pro_detail_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext() , Warranty_Activity.class);
+                intent.putExtra("pro_id" , getArguments().getString("product_id"));
                 startActivity(intent);
             }
         });
@@ -106,6 +112,7 @@ public class Show_pro_detail_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext() , Replacement_Activity.class);
+                intent.putExtra("pro_id" , getArguments().getString("product_id"));
                 startActivity(intent);
             }
         });
@@ -123,8 +130,18 @@ public class Show_pro_detail_fragment extends Fragment {
             map.put("title", getArguments().getString("title"));
             // fOR CLOTHES ++++++++++++++++++++++++++++++++++++++++
             try {
+                if(!getArguments().getString("s_size").isEmpty() &&!getArguments().getString("s_colour").isEmpty() ) {
+
+                    promodecolourandsizeList.add(new Product_model( colour_sel.getText().toString() ,size_sel.getText().toString()));
+
+                }else if(!getArguments().getString("cloth_colour").isEmpty() && !getArguments().getString("cloth_size").isEmpty())
+                {
+                    promodecolourandsizeList.add(new Product_model( colour_sel.getText().toString() ,size_sel.getText().toString()));
+                }
                 if(!getArguments().getString("cloth_colour").isEmpty()) {
+                    //   map.put("colour", getArguments().getString("cloth_colour"));
                     map.put("colour", getArguments().getString("cloth_colour"));
+
                     cloth_colour = getArguments().getString("cloth_colour");
 
                 }else if(!getArguments().getString("s_colour").isEmpty() )
@@ -146,7 +163,7 @@ public class Show_pro_detail_fragment extends Fragment {
             {
                 e.printStackTrace();
             }
-         //   map.put("cloth_size", getArguments().getString("cloth_size"));
+            //   map.put("cloth_size", getArguments().getString("cloth_size"));
             //++++++++++++++++++++++++++++++++++++++++++++++++++
             map.put("unit", getArguments().getString("unit"));
             map.put("Mrp", getArguments().getString("Mrp"));
@@ -450,7 +467,7 @@ public class Show_pro_detail_fragment extends Fragment {
             e.printStackTrace();
         }
 
-             //++++++++++++++++++++++++++++++end of  sizes+++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++end of  sizes+++++++++++++++++++++++++++++++++++++++
         tv_emi.setText(map.get("EMI"));
         tv_waranty.setText(map.get("Warantee"));
         tv_offer_desc.setText(map.get("p_offer_description"));
@@ -475,7 +492,7 @@ public class Show_pro_detail_fragment extends Fragment {
         Glide.with(getActivity())
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_offer_image"))
 //                .centerCrop()
-               // .placeholder(R.drawable.logoimg)
+                // .placeholder(R.drawable.logoimg)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -501,6 +518,8 @@ public class Show_pro_detail_fragment extends Fragment {
 
 
         if (dbcart.isInCart(map.get("product_id"))) {
+            //for carting
+
             add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
 
         } else {
@@ -511,7 +530,59 @@ public class Show_pro_detail_fragment extends Fragment {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!getArguments().getString("s_size").isEmpty() &&!getArguments().getString("s_colour").isEmpty() ) {
 
+                    promodecolourandsizeList.add(new Product_model( colour_sel.getText().toString() ,size_sel.getText().toString()));
+
+                    if(!getArguments().getString("cloth_colour").isEmpty()) {
+                        //   map.put("colour", getArguments().getString("cloth_colour"));
+                        map.put("colour", colour_sel.getText().toString());
+
+                        cloth_colour = getArguments().getString("cloth_colour");
+
+                    }else if(!getArguments().getString("s_colour").isEmpty() )
+                    {
+                        map.put("colour", colour_sel.getText().toString());
+                        shoe_colour = getArguments().getString("s_size");
+                    }
+                    if(!getArguments().getString("cloth_size").isEmpty())
+                    {
+                        map.put("size", size_sel.getText().toString());
+                        cloth_size = getArguments().getString("cloth_size");
+                    }else if(!getArguments().getString("s_size").isEmpty()) {
+
+                        //   map.put("s_colour", getArguments().getString("s_colour"));
+                        map.put("size", size_sel.getText().toString());
+                        shoe_size =  getArguments().getString("s_colour");
+                    }
+//           map.get("colour").
+
+                }else if(!getArguments().getString("cloth_colour").isEmpty() && !getArguments().getString("cloth_size").isEmpty())
+                {
+                    promodecolourandsizeList.add(new Product_model( colour_sel.getText().toString() ,size_sel.getText().toString()));
+
+                    if(!getArguments().getString("cloth_colour").isEmpty()) {
+                        //   map.put("colour", getArguments().getString("cloth_colour"));
+                        map.put("colour", colour_sel.getText().toString());
+
+                        cloth_colour = getArguments().getString("cloth_colour");
+
+                    }else if(!getArguments().getString("s_colour").isEmpty() )
+                    {
+                        map.put("colour", colour_sel.getText().toString());
+                        shoe_colour = getArguments().getString("s_size");
+                    }
+                    if(!getArguments().getString("cloth_size").isEmpty())
+                    {
+                        map.put("size", size_sel.getText().toString());
+                        cloth_size = getArguments().getString("cloth_size");
+                    }else if(!getArguments().getString("s_size").isEmpty()) {
+
+                        //   map.put("s_colour", getArguments().getString("s_colour"));
+                        map.put("size", size_sel.getText().toString());
+                        shoe_size =  getArguments().getString("s_colour");
+                    }
+                }
                 if(Integer.parseInt(getArguments().getString("stock")) >0){
 
                     if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))){

@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
 import static com.aryanonline.Fragment.Show_pro_detail_fragment.colour_sel;
 
 public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewHolder>  {
@@ -68,12 +69,13 @@ public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewH
     public void onBindViewHolder(final Colours_Adapter.ViewHolder viewHolder, final int position) {
         String Colour = dealList.get(position);
         Log.d("colour" , "is"+Colour);
-      //  viewHolder.colour_id.setBackgroundColor(Color.RED);
+        //  viewHolder.colour_id.setBackgroundColor(Color.RED);
         try {
             viewHolder.colour_id.setBackgroundColor(Color.parseColor(Colour));
             viewHolder.color_text.setText(Colour);
             if(position ==0)
             {
+                promodecolourandsizeList.get(position).setColour(String.valueOf(Color.parseColor(Colour)));
                 colour_sel.setText(dealList.get(0));
                 colour_sel.setBackgroundColor(Color.parseColor(Colour));
             }
@@ -84,6 +86,7 @@ public class Colours_Adapter  extends RecyclerView.Adapter<Colours_Adapter.ViewH
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 colour_sel.setText(dealList.get(position));
             }
         });

@@ -102,7 +102,7 @@ public class Home_fragment extends Fragment {
     ArrayList<DealsModel> deals_list;
     private DealsAdapter dealsAdapter;
     ImageView imageNew;
-     String product_image;
+    String product_image;
 
     public Home_fragment() {
         // Required empty public constructor
@@ -181,7 +181,7 @@ public class Home_fragment extends Fragment {
         }
 
         if (ConnectivityReceiver.isConnected()){
-           new GetOfferlist().execute();
+            new GetOfferlist().execute();
         }else {
             Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
         }
@@ -227,7 +227,7 @@ public class Home_fragment extends Fragment {
                 new RecyclerTouchListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-
+                        Toast.makeText(view.getContext(), "dealesview context", Toast.LENGTH_SHORT).show();
                         Bundle args = new Bundle();
                         Fragment fm = new Show_pro_detail_fragment();
                         args.putString("product_id", deals_list.get(position).getProductId());
@@ -267,7 +267,7 @@ public class Home_fragment extends Fragment {
                 new RecyclerTouchListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-
+                        Toast.makeText(view.getContext(), "rv_top", Toast.LENGTH_SHORT).show();
                         Bundle args = new Bundle();
                         Fragment fm = new Show_pro_detail_fragment();
                         args.putString("product_id", top_list.get(position).getProductId());
@@ -307,6 +307,7 @@ public class Home_fragment extends Fragment {
                 new RecyclerTouchListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        Toast.makeText(view.getContext(), "+offer_list.toString()", Toast.LENGTH_SHORT).show();
 
                         Bundle args = new Bundle();
                         Fragment fm = new Show_pro_detail_fragment();
@@ -400,7 +401,7 @@ public class Home_fragment extends Fragment {
                                 TextSliderView textSliderView = new TextSliderView(getActivity());
                                 // initialize a SliderLayout
                                 textSliderView
-                                     //   .description(name.get("slider_title"))
+                                        //   .description(name.get("slider_title"))
                                         .image(name.get("slider_image"))
                                         .setScaleType(BaseSliderView.ScaleType.Fit);
 
@@ -581,7 +582,7 @@ public class Home_fragment extends Fragment {
                         String top_product_status = c.getString("top_product_status");
                         offer_list.add(new OfferModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty
-                        ,product_offer_image,p_offer_description,top_product_status));
+                                ,product_offer_image,p_offer_description,top_product_status));
                     }
 
                     offerAdapter = new OfferAdapter(getActivity(), offer_list);
@@ -645,7 +646,7 @@ public class Home_fragment extends Fragment {
                         String product_id = c.getString("product_id");
                         String product_name = c.getString("product_name");
                         String product_description = c.getString("product_description");
-                         product_image = c.getString("product_image");
+                        product_image = c.getString("product_image");
                         String category_id = c.getString("category_id");
                         String in_stock = c.getString("in_stock");
                         String price = c.getString("price");
@@ -662,7 +663,7 @@ public class Home_fragment extends Fragment {
                         String product_offer_image = c.getString("product_offer_image");
                         String p_offer_description = c.getString("p_offer_description");
                         deals_list.add(new DealsModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
-                        ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
+                                ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
                                 product_offer_image,p_offer_description));
 
                         AnimationDrawable animation = new AnimationDrawable();

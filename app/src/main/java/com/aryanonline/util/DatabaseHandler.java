@@ -164,6 +164,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             map.put(COLUMN_INCREAMENT, cursor.getString(cursor.getColumnIndex(COLUMN_INCREAMENT)));
             map.put(COLUMN_STOCK, cursor.getString(cursor.getColumnIndex(COLUMN_STOCK)));
             map.put(COLUMN_TITLE, cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+            map.put(COLUMN_COLOUR, cursor.getString(cursor.getColumnIndex(COLUMN_COLOUR)));
+            map.put(COLUMN_SIZE, cursor.getString(cursor.getColumnIndex(COLUMN_SIZE)));
 
 
             list.add(map);

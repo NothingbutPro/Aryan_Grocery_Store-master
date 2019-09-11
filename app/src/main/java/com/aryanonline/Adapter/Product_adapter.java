@@ -33,6 +33,8 @@ import com.aryanonline.MainActivity;
 import com.aryanonline.R;
 import com.aryanonline.util.DatabaseHandler;
 
+import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList;
+
 
 public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyViewHolder>
         implements Filterable {
@@ -44,7 +46,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private DatabaseHandler dbcart;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice;
+        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
 
         public MyViewHolder(View view) {
@@ -59,6 +61,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
             iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
             mrpPrice = (TextView) view.findViewById(R.id.mrpPrice);
+                tv_colournsize = (TextView) view.findViewById(R.id.tv_colournsize);
 
             iv_remove.setVisibility(View.GONE);
 
@@ -110,12 +113,26 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("unit", modelList.get(position).getUnit());
                 map.put("Mrp", modelList.get(position).getMrp());
                 map.put("unit_value", modelList.get(position).getUnitValue());
-                map.put("cloth_colour", modelList.get(position).getCloth_color());
+                if(!modelList.get(position).getCloth_color().isEmpty()) {
+                    // map.put("cloth_colour", modelList.get(position).getCloth_color());
+                    // map.put("colour", modelList.get(position).getCloth_color());
+                    map.put("colour",promodecolourandsizeList.get(position).getColour());
+                }
                 map.put("cod", modelList.get(position).getCod());
-                map.put("s_colour", modelList.get(position).getS_clolor());
+                if(!modelList.get(position).getS_clolor().isEmpty()) {
+                    //map.put("s_colour", modelList.get(position).getS_clolor());
+//                    map.put("colour", modelList.get(position).getS_clolor());
+                    map.put("colour",promodecolourandsizeList.get(position).getColour());
+                }
                 Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
-                map.put("s_size", modelList.get(position).getS_size());
-                map.put("cloth_size", modelList.get(position).getCloth_size());
+                if(!modelList.get(position).getS_size().isEmpty()) {
+                    //  map.put("size", modelList.get(position).getS_size());
+                    map.put("size",promodecolourandsizeList.get(position).getSize());
+                }
+                if(!modelList.get(position).getCloth_size().isEmpty()) {
+                    //  map.put("size", modelList.get(position).getCloth_size());
+                    map.put("size",promodecolourandsizeList.get(position).getSize());
+                }
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
@@ -135,7 +152,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 Double price = Double.parseDouble(map.get("price"));
 
                 tv_total.setText("" + price * items);
-          //      mrpPrice.setText(map.get("Mrp"));
+                //      mrpPrice.setText(map.get("Mrp"));
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
             } else if (id == R.id.iv_subcat_img) {
@@ -253,10 +270,11 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnitValue() + " " +
 //                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
         holder.tv_price.setText(" " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
-
+        holder.tv_colournsize.setText("Selected Color "+promodecolourandsizeList.get(position).getColour()+" With "+promodecolourandsizeList.get(position).getSize());
         if (dbcart.isInCart(mList.getProductId())) {
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
             holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProductId()));
+
         } else {
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
         }
@@ -314,140 +332,164 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         };
     }
 
-    private void showImage(String image) {
+//    private void showImage(String image) {
+//
+//        final Dialog dialog = new Dialog(context);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.product_image_dialog);
+//        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+//        dialog.show();
+//
+//        ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
+//        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_dialog_img);
+//
+//        Glide.with(context)
+//                .load(BaseURL.IMG_PRODUCT_URL + image)
+//                .centerCrop()
+//                .placeholder(R.drawable.logoimg)
+//                .crossFade()
+//                .into(iv_image);
+//
+//        iv_image_cancle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//    }
 
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.product_image_dialog);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        dialog.show();
-
-        ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
-        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_dialog_img);
-
-        Glide.with(context)
-                .load(BaseURL.IMG_PRODUCT_URL + image)
-                .centerCrop()
-                .placeholder(R.drawable.logoimg)
-                .crossFade()
-                .into(iv_image);
-
-        iv_image_cancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-    }
-
-    private void showProductDetail(String image, String title, String description, String detail, final int position, String qty) {
-
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_product_detail);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        dialog.show();
-
-        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_product_detail_img);
-        ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
-        ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
-        TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
-        TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
-        final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
-        final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
-
-        tv_title.setText(title);
-        tv_detail.setText(detail);
-        tv_contetiy.setText(qty);
-        tv_detail.setText(description);
-
-        Glide.with(context)
-                .load(BaseURL.IMG_PRODUCT_URL + image)
-                .centerCrop()
-                .placeholder(R.drawable.logoimg)
-                .crossFade()
-                .into(iv_image);
-
-        if (dbcart.isInCart(modelList.get(position).getProductId())) {
-            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-            tv_contetiy.setText(dbcart.getCartItemQty(modelList.get(position).getProductId()));
-        } else {
-            tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-        }
-
-        tv_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                HashMap<String, String> map = new HashMap<>();
-
-                map.put("product_id", modelList.get(position).getProductId());
-                map.put("category_id", modelList.get(position).getCategoryId());
-                map.put("product_image", modelList.get(position).getProductImage());
-                map.put("increament", modelList.get(position).getIncreament());
-                map.put("product_name", modelList.get(position).getProductName());
-                map.put("cloth_colour", modelList.get(position).getCloth_color());
-                map.put("cod", modelList.get(position).getCod());
-                map.put("s_colour", modelList.get(position).getS_clolor());
-                Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
-                map.put("s_size", modelList.get(position).getS_size());
-                map.put("cloth_size", modelList.get(position).getCloth_size());
-                map.put("price", modelList.get(position).getPrice());
-                map.put("stock", modelList.get(position).getInStock());
-                map.put("title", modelList.get(position).getTitle());
-                map.put("unit", modelList.get(position).getUnit());
-
-                map.put("unit_value", modelList.get(position).getUnitValue());
-
-                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
-
-                    if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                    } else {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                    }
-                } else {
-                    dbcart.removeItemFromCart(map.get("product_id"));
-                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-                }
-
-                Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
-                Double price = Double.parseDouble(map.get("price"));
-
-                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-
-                notifyItemChanged(position);
-
-            }
-        });
-
-        iv_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int qty = Integer.valueOf(tv_contetiy.getText().toString());
-                qty = qty + 1;
-
-                tv_contetiy.setText(String.valueOf(qty));
-            }
-        });
-
-        iv_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int qty = 0;
-                if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
-                    qty = Integer.valueOf(tv_contetiy.getText().toString());
-
-                if (qty > 0) {
-                    qty = qty - 1;
-                    tv_contetiy.setText(String.valueOf(qty));
-                }
-            }
-        });
-
-    }
+//    private void showProductDetail(String image, String title, String description, String detail, final int position, String qty) {
+//
+//        final Dialog dialog = new Dialog(context);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.dialog_product_detail);
+//        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+//        dialog.show();
+//
+//        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_product_detail_img);
+//        ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
+//        ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
+//        TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
+//        TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
+//        final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
+//        final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
+//
+//        tv_title.setText(title);
+//        tv_detail.setText(detail);
+//        tv_contetiy.setText(qty);
+//        tv_detail.setText(description);
+//
+//        Glide.with(context)
+//                .load(BaseURL.IMG_PRODUCT_URL + image)
+//                .centerCrop()
+//                .placeholder(R.drawable.logoimg)
+//                .crossFade()
+//                .into(iv_image);
+//
+//        if (dbcart.isInCart(modelList.get(position).getProductId())) {
+//            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//            tv_contetiy.setText(dbcart.getCartItemQty(modelList.get(position).getProductId()));
+//        } else {
+//            tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//        }
+//
+//        tv_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                HashMap<String, String> map = new HashMap<>();
+//
+//                map.put("product_id", modelList.get(position).getProductId());
+//                map.put("category_id", modelList.get(position).getCategoryId());
+//                map.put("product_image", modelList.get(position).getProductImage());
+//                map.put("increament", modelList.get(position).getIncreament());
+//                map.put("product_name", modelList.get(position).getProductName());
+//                if(!modelList.get(position).getCloth_color().isEmpty()) {
+//                    // map.put("cloth_colour", modelList.get(position).getCloth_color());
+//                    // map.put("colour", modelList.get(position).getCloth_color());
+//                    Log.e("colour is",""+promodecolourandsizeList.get(0).getColour());
+//                    map.put("colour",promodecolourandsizeList.get(0).getColour());
+//                }
+//                map.put("cod", modelList.get(position).getCod());
+//                if(!modelList.get(position).getS_clolor().isEmpty()) {
+//                    //map.put("s_colour", modelList.get(position).getS_clolor());
+////                    map.put("colour", modelList.get(position).getS_clolor());
+//                    Log.e("colour is",""+promodecolourandsizeList.get(0).getColour());
+//                    map.put("colour",promodecolourandsizeList.get(0).getColour());
+//                }
+//                Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
+//                if(!modelList.get(position).getS_size().isEmpty()) {
+//                    //  map.put("size", modelList.get(position).getS_size());
+//                    Log.e("colour is",""+promodecolourandsizeList.get(0).getSize());
+//                    map.put("size",promodecolourandsizeList.get(0).getSize());
+//                }
+//                if(!modelList.get(position).getCloth_size().isEmpty()) {
+//                    //  map.put("size", modelList.get(position).getCloth_size());
+//                    Log.e("colour is",""+promodecolourandsizeList.get(0).getSize());
+//                    map.put("size",promodecolourandsizeList.get(0).getSize());
+//                }
+////                map.put("cloth_colour", modelList.get(position).getCloth_color());
+////                map.put("cod", modelList.get(position).getCod());
+////                map.put("s_colour", modelList.get(position).getS_clolor());
+////                Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
+////                map.put("s_size", modelList.get(position).getS_size());
+////                map.put("cloth_size", modelList.get(position).getCloth_size());
+//                map.put("price", modelList.get(position).getPrice());
+//                map.put("stock", modelList.get(position).getInStock());
+//                map.put("title", modelList.get(position).getTitle());
+//                map.put("unit", modelList.get(position).getUnit());
+//
+//                map.put("unit_value", modelList.get(position).getUnitValue());
+//
+//                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//
+//                    if (dbcart.isInCart(map.get("product_id"))) {
+//                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                    } else {
+//                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                    }
+//                } else {
+//                    dbcart.removeItemFromCart(map.get("product_id"));
+//                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//                }
+//
+//                Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
+//                Double price = Double.parseDouble(map.get("price"));
+//
+//                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                notifyItemChanged(position);
+//
+//            }
+//        });
+//
+//        iv_plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int qty = Integer.valueOf(tv_contetiy.getText().toString());
+//                qty = qty + 1;
+//
+//                tv_contetiy.setText(String.valueOf(qty));
+//            }
+//        });
+//
+//        iv_minus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int qty = 0;
+//                if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
+//                    qty = Integer.valueOf(tv_contetiy.getText().toString());
+//
+//                if (qty > 0) {
+//                    qty = qty - 1;
+//                    tv_contetiy.setText(String.valueOf(qty));
+//                }
+//            }
+//        });
+//
+//    }
 
 }
