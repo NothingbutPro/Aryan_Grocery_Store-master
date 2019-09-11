@@ -1,12 +1,173 @@
 package com.aryanonline;
 
 import android.app.ProgressDialog;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstapayListener;
+import instamojo.library.Config;
+import instamojo.library.InstapayListener;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.Config;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
 import android.app.Activity;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.Config;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
 
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.InstamojoPay;
+import instamojo.library.Config;
+import instamojo.library.InstamojoPay;
 import org.json.JSONException;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
 
+import instamojo.library.Config;
+import instamojo.library.Config;
 import android.content.IntentFilter;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
+import instamojo.library.Config;
 
+import instamojo.library.Config;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.content.IntentFilter;
@@ -33,48 +194,48 @@ import javax.net.ssl.HttpsURLConnection;
 public class Warranty_Activity extends AppCompatActivity {
     TextView warrant;
 
-    //    private void callInstamojoPay(String email, String phone, String amount, String purpose, String buyername) {
-//        final Activity activity = this;
-//        InstamojoPay instamojoPay = new InstamojoPay();
-//        IntentFilter filter = new IntentFilter("ai.devsupport.instamojo");
-//        registerReceiver(instamojoPay, filter);
-//        JSONObject pay = new JSONObject();
-//        try {
-//            pay.put("email", email);
-//            pay.put("phone", phone);
-//            pay.put("purpose", purpose);
-//            pay.put("amount", amount);
-//            pay.put("name", buyername);
-//       pay.put("send_sms", true);
-//      pay.put("send_email", true);
-// } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        initListener();
-//        instamojoPay.start(activity, pay, listener);
-//    }
+        private void callInstamojoPay(String email, String phone, String amount, String purpose, String buyername) {
+        final Activity activity = this;
+        InstamojoPay instamojoPay = new InstamojoPay();
+        IntentFilter filter = new IntentFilter("ai.devsupport.instamojo");
+        registerReceiver(instamojoPay, filter);
+        JSONObject pay = new JSONObject();
+        try {
+            pay.put("email", email);
+            pay.put("phone", phone);
+            pay.put("purpose", purpose);
+            pay.put("amount", amount);
+            pay.put("name", buyername);
+       pay.put("send_sms", true);
+      pay.put("send_email", true);
+ } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        initListener();
+        instamojoPay.start(activity, pay, listener);
+    }
+
+    InstapayListener listener;
+//
 //
 //    InstapayListener listener;
-////
-////
-////    InstapayListener listener;
-//
-//
-//    private void initListener() {
-//        listener = new InstapayListener() {
-//            @Override
-//            public void onSuccess(String response) {
-//                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG)
-//                        .show();
-//            }
-//
-//            @Override
-//            public void onFailure(int code, String reason) {
-//                Toast.makeText(getApplicationContext(), "Failed: " + reason, Toast.LENGTH_LONG)
-//                        .show();
-//            }
-//        };
-//    }
+
+
+    private void initListener() {
+        listener = new InstapayListener() {
+            @Override
+            public void onSuccess(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            @Override
+            public void onFailure(int code, String reason) {
+                Toast.makeText(getApplicationContext(), "Failed: " + reason, Toast.LENGTH_LONG)
+                        .show();
+            }
+        };
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
