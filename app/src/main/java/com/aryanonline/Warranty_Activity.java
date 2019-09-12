@@ -173,6 +173,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -192,7 +193,7 @@ import java.util.Iterator;
 import javax.net.ssl.HttpsURLConnection;
 
 public class Warranty_Activity extends AppCompatActivity {
-    TextView warrant;
+    WebView warrant;
 
 
     @Override
@@ -201,6 +202,7 @@ public class Warranty_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_warranty_);
         // Call the function callInstamojo to start payment here
         warrant = findViewById(R.id.warrant);
+
         new GETWARRANTy().execute();
     }
 
@@ -288,7 +290,8 @@ public class Warranty_Activity extends AppCompatActivity {
 
                     jsonObject = new JSONArray(result).getJSONObject(0);
                     String warrantstr = jsonObject.getString("offers_warranty");
-                    warrant.setText(warrantstr);
+
+                    warrant.loadData(warrantstr, "text/html; charset=UTF-8", null);
                 }catch (Exception e)
                 {
                     e.printStackTrace();

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -23,7 +24,7 @@ import java.util.Iterator;
 import javax.net.ssl.HttpsURLConnection;
 
 public class Replacement_Activity extends AppCompatActivity {
-    TextView replace;
+    WebView replace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +113,8 @@ public class Replacement_Activity extends AppCompatActivity {
 
                     jsonObject = new JSONArray(result).getJSONObject(0);
                     String warrantstr = jsonObject.getString("replacement_policy");
-                    replace.setText(warrantstr);
+                    Log.e("warrs",""+warrantstr);
+                    replace.loadData(warrantstr, "text/html; charset=UTF-8", null);
                 }catch (Exception e)
                 {
                     e.printStackTrace();

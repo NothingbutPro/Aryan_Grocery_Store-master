@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity
                 }
             });
             nav_menu.findItem(R.id.nav_logout).setVisible(false);
-            nav_menu.findItem(R.id.nav_user).setVisible(false);
+            nav_menu.findItem(R.id.nav_user).setVisible(true);
         }
     }
 

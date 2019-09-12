@@ -304,6 +304,7 @@ public class RegisterActivity extends AppCompatActivity implements
                     }
 
                 } catch (JSONException e) {
+                    Toast.makeText(RegisterActivity.this, "User May be already registered or please check the informations", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }

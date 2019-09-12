@@ -32,15 +32,16 @@
 <!--                    android:elevation="4dp"-->
 <!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:padding="2dp"
-                        android:id="@+id/tv_prod_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text=" "
-                        android:textColor="#000"
-                        android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/prod_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Product HighLight:"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
 
 <!--                </LinearLayout>-->
                 <ImageView
@@ -53,7 +54,7 @@
 
 
                 <RelativeLayout
-                    android:layout_below="@+id/tv_prod_desc"
+                    android:layout_below="@+id/prod_name"
                     android:elevation="4dp"
                     android:background="#fff"
                     android:layout_width="match_parent"
@@ -209,17 +210,17 @@
                 android:layout_height="wrap_content"
                 android:background="#fff"
                 android:elevation="4dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/prod_name"
-                    android:layout_width="wrap_content"
+                    android:padding="2dp"
+                    android:id="@+id/tv_prod_desc"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Product HighLight:"
+                    android:text=" "
                     android:textColor="#000"
-                    android:textSize="13dp"
-                    android:textStyle="bold" />
+                    android:textSize="13dp" />
 
                 <TextView
 
@@ -230,6 +231,10 @@
                     android:textColor="#000"
                     android:textSize="13dp"
                     android:textStyle="bold" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/colour_sel2"
                     android:layout_width="wrap_content"
@@ -248,7 +253,7 @@
                     android:textColor="#000"
                     android:textSize="13dp"
                     android:textStyle="bold" />
-
+                </LinearLayout>
             </LinearLayout>
                 <!--        FOR CLOTHES AND SHOOES-->
             <LinearLayout
