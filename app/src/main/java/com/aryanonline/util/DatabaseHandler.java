@@ -63,7 +63,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(exe);
 
     }
+    public boolean setCartwithoutsize(HashMap<String, String> map, Float Qty) {
+        db = getWritableDatabase();
+        if (isInCart(map.get(COLUMN_ID))) {
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            return false;
+        } else {
+            ContentValues values = new ContentValues();
 
+            values.put(COLUMN_ID, map.get(COLUMN_ID));
+            values.put(COLUMN_QTY, Qty);
+            values.put(COLUMN_CAT_ID, map.get(COLUMN_CAT_ID));
+            values.put(COLUMN_IMAGE, map.get(COLUMN_IMAGE));
+            values.put(COLUMN_INCREAMENT, map.get(COLUMN_INCREAMENT));
+            values.put(COLUMN_NAME, map.get(COLUMN_NAME));
+            values.put(COLUMN_PRICE, map.get(COLUMN_PRICE));
+            values.put(COLUMN_STOCK, map.get(COLUMN_STOCK));
+            values.put(COLUMN_TITLE, map.get(COLUMN_TITLE));
+            values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
+            values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
+//            values.put(COLUMN_COLOUR, map.get(COLUMN_COLOUR));
+
+//            values.put(COLUMN_SIZE, map.get(COLUMN_SIZE));
+
+            db.insert(CART_TABLE, null, values);
+            return true;
+        }
+    }
     public boolean setCart(HashMap<String, String> map, Float Qty) {
         db = getWritableDatabase();
         if (isInCart(map.get(COLUMN_ID))) {
@@ -84,6 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
             values.put(COLUMN_COLOUR, map.get(COLUMN_COLOUR));
+
             values.put(COLUMN_SIZE, map.get(COLUMN_SIZE));
 
             db.insert(CART_TABLE, null, values);

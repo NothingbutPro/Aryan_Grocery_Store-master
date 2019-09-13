@@ -41,7 +41,7 @@ import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList
 
 public class Show_pro_detail_fragment extends Fragment {
     TextView add_to_cart,prod_buy_now,prod_name,tv_prod_price,tv_prod_desc,prod_in_stock,
-            tv_emi,tv_waranty,tv_offer_desc;
+            tv_emi,tv_waranty,tv_offer_desc,tv_price_only,tv_mrp_only;
     //
     ImageView prod_img,iv_special_offer,offer_image;
     String shoe_colour ="no",cloth_colour = "no",cloth_size = "no",shoe_size = "no";
@@ -81,6 +81,8 @@ public class Show_pro_detail_fragment extends Fragment {
         waryxt=view.findViewById(R.id.waryxt);
         replacetxt=view.findViewById(R.id.replacetxt);
         colour_sel2=view.findViewById(R.id.colour_sel2);
+        tv_price_only=view.findViewById(R.id.tv_price_only);
+        tv_mrp_only=view.findViewById(R.id.tv_mrp_only);
         size_sel2=view.findViewById(R.id.size_sel2);
         prod_img=view.findViewById(R.id.prod_img);
         prod_name=view.findViewById(R.id.prod_name);
@@ -180,7 +182,10 @@ public class Show_pro_detail_fragment extends Fragment {
         }
         prod_name.setText(map.get("product_name"));
         tv_prod_desc.setText("Product Description: "+map.get("Prod_description"));
-        tv_prod_price.setText(map.get("unit_value")+" "+map.get("unit")+" "+"INR "+map.get("price"));
+        tv_price_only.setText("Price: "+map.get("price"));
+        tv_mrp_only.setText("MRP: "+map.get("Mrp"));
+      //  tv_prod_price.setText(map.get("unit_value")+" "+map.get("unit")+" "+"INR "+map.get("price"));
+        tv_prod_price.setText(map.get("unit_value")+" "+map.get("unit"));
         try {
             if (!cloth_colour.equals("no")) {
                 int size =cloth_colour.length();
@@ -532,104 +537,161 @@ public class Show_pro_detail_fragment extends Fragment {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!getArguments().getString("s_size").isEmpty() &&!getArguments().getString("s_colour").isEmpty() ) {
+                try {
+                    if (!getArguments().getString("s_size").isEmpty() && !getArguments().getString("s_colour").isEmpty()) {
 
-                    promodecolourandsizeList.add(new Product_model( colour_sel.getText().toString() ,size_sel.getText().toString()));
+                        promodecolourandsizeList.add(new Product_model(colour_sel.getText().toString(), size_sel.getText().toString()));
 
-                    if(!getArguments().getString("cloth_colour").isEmpty()) {
-                        //   map.put("colour", getArguments().getString("cloth_colour"));
-                        map.put("colour", colour_sel.getText().toString());
+                        if (!getArguments().getString("cloth_colour").isEmpty()) {
+                            //   map.put("colour", getArguments().getString("cloth_colour"));
+                            map.put("colour", colour_sel.getText().toString());
 
-                        cloth_colour = getArguments().getString("cloth_colour");
+                            cloth_colour = getArguments().getString("cloth_colour");
 
-                    }else if(!getArguments().getString("s_colour").isEmpty() )
-                    {
-                        map.put("colour", colour_sel.getText().toString());
-                        shoe_colour = getArguments().getString("s_size");
-                    }
-                    if(!getArguments().getString("cloth_size").isEmpty())
-                    {
-                        map.put("size", size_sel.getText().toString());
-                        cloth_size = getArguments().getString("cloth_size");
-                    }else if(!getArguments().getString("s_size").isEmpty()) {
+                        } else if (!getArguments().getString("s_colour").isEmpty()) {
+                            map.put("colour", colour_sel.getText().toString());
+                            shoe_colour = getArguments().getString("s_size");
+                        }
+                        if (!getArguments().getString("cloth_size").isEmpty()) {
+                            map.put("size", size_sel.getText().toString());
+                            cloth_size = getArguments().getString("cloth_size");
+                        } else if (!getArguments().getString("s_size").isEmpty()) {
 
-                        //   map.put("s_colour", getArguments().getString("s_colour"));
-                        map.put("size", size_sel.getText().toString());
-                        shoe_size =  getArguments().getString("s_colour");
-                    }
+                            //   map.put("s_colour", getArguments().getString("s_colour"));
+                            map.put("size", size_sel.getText().toString());
+                            shoe_size = getArguments().getString("s_colour");
+                        }
 //           map.get("colour").
 
-                }else if(!getArguments().getString("cloth_colour").isEmpty() && !getArguments().getString("cloth_size").isEmpty())
-                {
-                    promodecolourandsizeList.add(new Product_model( colour_sel.getText().toString() ,size_sel.getText().toString()));
+                    } else if (!getArguments().getString("cloth_colour").isEmpty() && !getArguments().getString("cloth_size").isEmpty()) {
+                        promodecolourandsizeList.add(new Product_model(colour_sel.getText().toString(), size_sel.getText().toString()));
 
-                    if(!getArguments().getString("cloth_colour").isEmpty()) {
-                        //   map.put("colour", getArguments().getString("cloth_colour"));
-                        map.put("colour", colour_sel.getText().toString());
+                        if (!getArguments().getString("cloth_colour").isEmpty()) {
+                            //   map.put("colour", getArguments().getString("cloth_colour"));
+                            map.put("colour", colour_sel.getText().toString());
 
-                        cloth_colour = getArguments().getString("cloth_colour");
+                            cloth_colour = getArguments().getString("cloth_colour");
 
-                    }else if(!getArguments().getString("s_colour").isEmpty() )
-                    {
-                        map.put("colour", colour_sel.getText().toString());
-                        shoe_colour = getArguments().getString("s_size");
+                        } else if (!getArguments().getString("s_colour").isEmpty()) {
+                            map.put("colour", colour_sel.getText().toString());
+                            shoe_colour = getArguments().getString("s_size");
+                        }
+                        if (!getArguments().getString("cloth_size").isEmpty()) {
+                            map.put("size", size_sel.getText().toString());
+                            cloth_size = getArguments().getString("cloth_size");
+                        } else if (!getArguments().getString("s_size").isEmpty()) {
+
+                            //   map.put("s_colour", getArguments().getString("s_colour"));
+                            map.put("size", size_sel.getText().toString());
+                            shoe_size = getArguments().getString("s_colour");
+                        }
                     }
-                    if(!getArguments().getString("cloth_size").isEmpty())
-                    {
-                        map.put("size", size_sel.getText().toString());
-                        cloth_size = getArguments().getString("cloth_size");
-                    }else if(!getArguments().getString("s_size").isEmpty()) {
+                    if (Integer.parseInt(getArguments().getString("stock")) > 0) {
 
-                        //   map.put("s_colour", getArguments().getString("s_colour"));
-                        map.put("size", size_sel.getText().toString());
-                        shoe_size =  getArguments().getString("s_colour");
-                    }
-                }
-                if(Integer.parseInt(getArguments().getString("stock")) >0){
+                        if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))) {
 
-                    if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))){
+                            Toast.makeText(getActivity(), "Add to cart Successfully", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getActivity(), "Add to cart Successfully", Toast.LENGTH_SHORT).show();
-
-                        if (dbcart.isInCart(map.get("product_id"))) {
-                            dbcart.setCart(map, Float.valueOf("1"));
-                            add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                            if (dbcart.isInCart(map.get("product_id"))) {
+                                if (!map.get("colour").isEmpty() || !map.get("size").isEmpty()) {
+                                    map.put("size", "None");
+                                    map.put("colour", "None");
+                                    dbcart.setCart(map, Float.valueOf("1"));
+                                    add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                                } else {
+                                    map.put("size", "None");
+                                    map.put("colour", "None");
+                                    dbcart.setCartwithoutsize(map, Float.valueOf("1"));
+                                    add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                                }
+                            } else {
+                                map.put("size", "None");
+                                map.put("colour", "None");
+                                dbcart.setCart(map, Float.valueOf("1"));
+                                add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                            }
+                            ((MainActivity) getActivity()).setCartCounter("" + dbcart.getCartCount());
 
                         } else {
-                            dbcart.setCart(map, Float.valueOf("1"));
-                            add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                            Fragment Favorite_List = new Cart_fragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.contentPanel, Favorite_List);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
                         }
-                        ((MainActivity)getActivity()).setCartCounter(""+ dbcart.getCartCount());
 
+                    } else {
+
+                        if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))) {
+
+                            Toast.makeText(getActivity(), "Sorry, Out of Stock", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Fragment Favorite_List = new Cart_fragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.contentPanel, Favorite_List);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
                     }
-                    else
-                    {
-                        Fragment Favorite_List=new Cart_fragment();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.contentPanel,Favorite_List);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                    }
 
-                }else {
+                }catch (Exception e)
+                {
 
-                    if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))){
+                    e.printStackTrace();
+                    if (Integer.parseInt(getArguments().getString("stock")) > 0) {
 
-                        Toast.makeText(getActivity(), "Sorry, Out of Stock", Toast.LENGTH_SHORT).show();
+                        if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))) {
 
-                    }
-                    else
-                    {
-                        Fragment Favorite_List=new Cart_fragment();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.contentPanel,Favorite_List);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
+                            Toast.makeText(getActivity(), "Add to cart Successfully", Toast.LENGTH_SHORT).show();
+
+                            if (dbcart.isInCart(map.get("product_id"))) {
+                                if (!map.get("colour").isEmpty() || !map.get("size").isEmpty()) {
+                                    map.put("size", "None");
+                                    map.put("colour", "None");
+                                    dbcart.setCart(map, Float.valueOf("1"));
+                                    add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                                } else {
+                                    map.put("size", "None");
+                                    map.put("colour", "None");
+                                    dbcart.setCartwithoutsize(map, Float.valueOf("1"));
+                                    add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                                }
+                            } else {
+                                map.put("size", "None");
+                                map.put("colour", "None");
+                                dbcart.setCart(map, Float.valueOf("1"));
+                                add_to_cart.setText(getResources().getString(R.string.tv_btn_gocart));
+                            }
+                            ((MainActivity) getActivity()).setCartCounter("" + dbcart.getCartCount());
+
+                        } else {
+                            Fragment Favorite_List = new Cart_fragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.contentPanel, Favorite_List);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+
+                    } else {
+
+                        if (add_to_cart.getText().toString().equals(getResources().getString(R.string.tv_btn_addcart))) {
+
+                            Toast.makeText(getActivity(), "Sorry, Out of Stock", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Fragment Favorite_List = new Cart_fragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.contentPanel, Favorite_List);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
                     }
                 }
-
             }
         });
         //**********************************
@@ -640,9 +702,19 @@ public class Show_pro_detail_fragment extends Fragment {
                 if(Integer.parseInt(getArguments().getString("stock")) >0){
 
                     if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf("1"));
+                        if(!map.get("size").isEmpty()||!map.get("colour").isEmpty()) {
+                            map.put("size" , "None");
+                            map.put("colour" , "None");
+                            dbcart.setCart(map, Float.valueOf("1"));
+                        }else {
+                            map.put("size" , "None");
+                            map.put("colour" , "None");
+                            dbcart.setCartwithoutsize(map, Float.valueOf("1"));
+                        }
 
                     } else {
+                        map.put("size" , "None");
+                        map.put("colour" , "None");
                         dbcart.setCart(map, Float.valueOf("1"));
                     }
                     ((MainActivity)getActivity()).setCartCounter(""+ dbcart.getCartCount());

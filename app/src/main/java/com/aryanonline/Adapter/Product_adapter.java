@@ -137,9 +137,20 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
                     if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        if(!map.get("size").isEmpty() || !map.get("colour").isEmpty()) {
+                            map.put("size" , "None");
+                            map.put("colour" , "None");
+                            dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        }else {
+                            map.put("size" , "None");
+                            map.put("colour" , "None");
+                            dbcart.setCartwithoutsize(map, Float.valueOf(tv_contetiy.getText().toString()));
+                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        }
                     } else {
+                        map.put("size" , "None");
+                        map.put("colour" , "None");
                         dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     }

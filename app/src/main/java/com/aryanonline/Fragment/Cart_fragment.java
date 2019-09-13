@@ -242,6 +242,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), ""+error, Toast.LENGTH_SHORT).show();
                     Toast.makeText(getActivity(), "Connection Time out", Toast.LENGTH_SHORT).show();
                 }
             }

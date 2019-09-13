@@ -105,8 +105,16 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
 
                     updateintent();
                 }
-
-                dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+                if(!map.get("size").isEmpty() || !map.get("colour").isEmpty()) {
+                    map.put("size" , "None");
+                    map.put("colour" , "None");
+                    dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+                }else {
+                    map.put("size" , "None");
+                    map.put("colour" , "None");
+                    dbHandler.setCartwithoutsize(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+                  //  setCartwithoutsize
+                }
 
                 Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
                 Double price = Double.parseDouble(map.get("price"));
@@ -126,9 +134,15 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                 qty = qty + 1;
 
                 holder.tv_contetiy.setText(String.valueOf(qty));
-
-                dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
-
+                if(!map.get("colour").isEmpty() || !map.get("size").isEmpty()  ) {
+                    map.put("size" , "None");
+                    map.put("colour" , "None");
+                    dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+                }else {
+                    map.put("size" , "None");
+                    map.put("colour" , "None");
+                    dbHandler.setCartwithoutsize(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+                }
                 Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
                 Double price = Double.parseDouble(map.get("price"));
 
