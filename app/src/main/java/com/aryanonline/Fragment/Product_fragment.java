@@ -189,7 +189,8 @@ public class Product_fragment extends Fragment {
                                     response.getJSONArray("data").getJSONObject(p).getString("cloth_color"),
                                     response.getJSONArray("data").getJSONObject(p).getString("cloth_size"),
                                     response.getJSONArray("data").getJSONObject(p).getString("replacement_policy"),
-                                    response.getJSONArray("data").getJSONObject(p).getString("cod")
+                                    response.getJSONArray("data").getJSONObject(p).getString("cod"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("delivery_charg")
                             ));
                             if(!response.getJSONArray("data").getJSONObject(p).getString("s_clolor").isEmpty() &&
                                     !response.getJSONArray("data").getJSONObject(p).getString("s_size").isEmpty())

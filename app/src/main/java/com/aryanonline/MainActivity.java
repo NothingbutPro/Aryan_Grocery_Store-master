@@ -121,6 +121,13 @@ public class MainActivity extends AppCompatActivity
         iv_profile = (ImageView) header.findViewById(R.id.iv_header_img);
         tv_name = (TextView) header.findViewById(R.id.tv_header_name);
         tv_number = (TextView) header.findViewById(R.id.tv_header_moblie);
+       MenuItem logBtn = nav_menu.findItem(R.id.nav_login);
+              if(sessionManagement.isLoggedIn()){
+                  logBtn.setTitle("LogOut");
+              }else {
+                  logBtn.setTitle("Login");
+              }
+//
 
         iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -347,7 +354,17 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.contentPanel, fm_home, "Home_fragment")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
-        } else if (id==R.id.nav_offer){
+        }        if (id == R.id.nav_login) {
+            if(!sessionManagement.isLoggedIn()) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }else {
+                sessionManagement.logoutSession();
+            }
+        }
+
+
+        else if (id==R.id.nav_offer){
 
         }else if (id==R.id.nav_office){
             fm = new LocationFragment();

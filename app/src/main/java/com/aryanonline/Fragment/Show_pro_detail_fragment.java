@@ -41,7 +41,7 @@ import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList
 
 public class Show_pro_detail_fragment extends Fragment {
     TextView add_to_cart,prod_buy_now,prod_name,tv_prod_price,tv_prod_desc,prod_in_stock,
-            tv_emi,tv_waranty,tv_offer_desc,tv_price_only,tv_mrp_only;
+            tv_emi,tv_waranty,tv_offer_desc,tv_price_only,tv_mrp_only,tv_del_charges;
     //
     ImageView prod_img,iv_special_offer,offer_image;
     String shoe_colour ="no",cloth_colour = "no",cloth_size = "no",shoe_size = "no";
@@ -81,6 +81,7 @@ public class Show_pro_detail_fragment extends Fragment {
         waryxt=view.findViewById(R.id.waryxt);
         replacetxt=view.findViewById(R.id.replacetxt);
         colour_sel2=view.findViewById(R.id.colour_sel2);
+        tv_del_charges=view.findViewById(R.id.tv_del_charges);
         tv_price_only=view.findViewById(R.id.tv_price_only);
         tv_mrp_only=view.findViewById(R.id.tv_mrp_only);
         size_sel2=view.findViewById(R.id.size_sel2);
@@ -132,6 +133,8 @@ public class Show_pro_detail_fragment extends Fragment {
             map.put("price",getArguments().getString("price"));
             map.put("stock",getArguments().getString("stock"));
             map.put("title", getArguments().getString("title"));
+            map.put("delivery_charg", getArguments().getString("delivery_charg"));
+            tv_del_charges.setText(getArguments().getString("delivery_charg"));
             // fOR CLOTHES ++++++++++++++++++++++++++++++++++++++++
             try {
                 if(!getArguments().getString("s_size").isEmpty() &&!getArguments().getString("s_colour").isEmpty() ) {

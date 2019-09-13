@@ -244,6 +244,7 @@ public class Home_fragment extends Fragment {
                         args.putString("Prod_description", deals_list.get(position).getProductDescription());
 
                         args.putString("EMI", deals_list.get(position).getEmi());
+                        args.putString("delivery_charg", deals_list.get(position).getUnitValue());
                         args.putString("Warantee", deals_list.get(position).getWarranty());
                         args.putString("product_offer_image", deals_list.get(position).getProduct_offer_image());
                         args.putString("p_offer_description", deals_list.get(position).getP_offer_description());
@@ -662,9 +663,10 @@ public class Home_fragment extends Fragment {
                         String warranty = c.getString("warranty");
                         String product_offer_image = c.getString("product_offer_image");
                         String p_offer_description = c.getString("p_offer_description");
+                        String delivery_charg = c.getString("delivery_charg");
                         deals_list.add(new DealsModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
-                                product_offer_image,p_offer_description));
+                                product_offer_image,p_offer_description , delivery_charg));
 
                         AnimationDrawable animation = new AnimationDrawable();
                         try {

@@ -46,12 +46,13 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private DatabaseHandler dbcart;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize;
+        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize,tv_delchr;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
 
         public MyViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
+            tv_delchr = (TextView) view.findViewById(R.id.tv_delchr);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
             tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
@@ -111,8 +112,10 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("stock", modelList.get(position).getInStock());
                 map.put("title", modelList.get(position).getTitle());
                 map.put("unit", modelList.get(position).getUnit());
+                map.put("delivery_charg", modelList.get(position).getDelivery_charg());
                 map.put("Mrp", modelList.get(position).getMrp());
                 map.put("unit_value", modelList.get(position).getUnitValue());
+
                 if(!modelList.get(position).getCloth_color().isEmpty()) {
                     // map.put("cloth_colour", modelList.get(position).getCloth_color());
                     // map.put("colour", modelList.get(position).getCloth_color());
@@ -193,6 +196,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 args.putString("s_colour", modelList.get(position).getS_clolor());
                 Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
                 args.putString("s_size", modelList.get(position).getS_size());
+                args.putString("delivery_charg", modelList.get(position).getDelivery_charg());
                 args.putString("cloth_size", modelList.get(position).getCloth_size());
                 //++++++++++++++++++++++++++++Sfd+++++++++++++++++
                 fm.setArguments(args);
@@ -221,6 +225,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 args.putString("title", modelList.get(position).getTitle());
                 args.putString("unit", modelList.get(position).getUnit());
                 args.putString("Mrp", modelList.get(position).getMrp());
+                args.putString("delivery_charg", modelList.get(position).getDelivery_charg());
                 args.putString("unit_value", modelList.get(position).getUnitValue());
                 args.putString("Prod_description", modelList.get(position).getProductDescription());
                 args.putString("EMI", modelList.get(position).getEmi());
@@ -267,6 +272,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Product_model mList = modelList.get(position);
         Log.e("mList.getProductImage()","mList.getProductImage() "+mList.getProductImage());
         Log.e("mList","mList.getProductImage() "+mList.getProductName());
+        holder.tv_delchr.setText(modelList.get(position).getDelivery_charg());
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProductImage())
                 .centerCrop()

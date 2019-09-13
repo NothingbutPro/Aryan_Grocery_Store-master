@@ -85,7 +85,6 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         Double price = Double.parseDouble(map.get("price"));
 
         holder.tv_total.setText("" + price * items);
-
         holder.iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

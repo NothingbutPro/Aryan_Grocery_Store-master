@@ -48,9 +48,19 @@ public class Product_model implements Serializable {
     private String cloth_size;
     private String replacement_policy;
     private String cod;
+    private String delivery_charg;
+    public String getDelivery_charg() {
+        return delivery_charg;
+    }
+
+    public void setDelivery_charg(String delivery_charg) {
+        this.delivery_charg = delivery_charg;
+    }
+
+
     //+++++++++++++++++++++++++++++++++++++++++++for+++++++++++++++++++
     public Product_model(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus, String date, String offersPersent, String offersWarranty, String stock, String title, String parent,String s_clolor,String s_size,String cloth_color,String cloth_size,
-                         String replacement_policy,String cod) {
+                         String replacement_policy,String cod,String delivery_charg) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -64,6 +74,7 @@ public class Product_model implements Serializable {
         this.cloth_color = cloth_color;
         this.cloth_size = cloth_size;
         this.replacement_policy = replacement_policy;
+        this.delivery_charg = delivery_charg;
         this.cod = cod;
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++end
         this.price = price;
