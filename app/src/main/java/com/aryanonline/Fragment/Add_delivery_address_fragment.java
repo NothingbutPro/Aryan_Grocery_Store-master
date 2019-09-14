@@ -185,7 +185,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         getname = et_name.getText().toString();
         getpin = et_pin.getText().toString();
         gethouse = et_house.getText().toString();
-        getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
+       // getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
+        getsocity = "122";
 
         boolean cancel = false;
         View focusView = null;
@@ -219,11 +220,11 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(getsocity) && getsocity == null) {
-            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = btn_socity;
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(getsocity) && getsocity == null) {
+//            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            focusView = btn_socity;
+//            cancel = true;
+//        }
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -240,9 +241,9 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 // check internet connection
                 if (ConnectivityReceiver.isConnected()) {
                     if (isEdit) {
-                        makeEditAddressRequest(getlocation_id, getpin, getsocity, gethouse, getname, getphone);
+                        makeEditAddressRequest(getlocation_id, getpin, "122", gethouse, getname, getphone);
                     } else {
-                        makeAddAddressRequest(user_id, getpin, getsocity, gethouse, getname, getphone);
+                        makeAddAddressRequest(user_id, getpin, "122", gethouse, getname, getphone);
                     }
                 }
             }
@@ -267,7 +268,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", user_id);
         params.put("pincode", pincode);
-        params.put("socity_id", socity_id);
+        params.put("socity_id", "122");
         params.put("house_no", house_no);
         params.put("receiver_name", receiver_name);
         params.put("receiver_mobile", receiver_mobile);
@@ -324,7 +325,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         Map<String, String> params = new HashMap<String, String>();
         params.put("location_id", location_id);
         params.put("pincode", pincode);
-        params.put("socity_id", socity_id);
+        params.put("socity_id", "122");
         params.put("house_no", house_no);
         params.put("receiver_name", receiver_name);
         params.put("receiver_mobile", receiver_mobile);
