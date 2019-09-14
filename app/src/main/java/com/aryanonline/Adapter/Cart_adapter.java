@@ -77,8 +77,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                 .into(holder.iv_logo);
         Log.e("map has adapter" ,""+ map.get("cloth_size"));
         holder.tv_title.setText(map.get("product_name"));
-        holder.tv_price.setText(map.get("unit_value") + " " +
-                map.get("unit") +" "+activity.getResources().getString(R.string.currency)+" "+ map.get("price"));
+        holder.tv_price.setText(activity.getResources().getString(R.string.currency)+" "+ map.get("price"));
         holder.tv_contetiy.setText(map.get("qty"));
 
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));

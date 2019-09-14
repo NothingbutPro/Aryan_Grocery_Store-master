@@ -104,15 +104,15 @@ public class Delivery_payment_detail_fragment extends Fragment {
         tv_timeslot.setText(getdate + " " + gettime);
         tv_address.setText(getaddress);
 
-        Double total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+        Double total = Double.parseDouble(db_cart.getTotalAmount()) +  Integer.valueOf( db_cart.getCartDelCharge());
 
         //tv_total.setText("" + db_cart.getTotalAmount());
         //tv_item.setText("" + db_cart.getCartCount());
         tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
-                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
-                getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
+                getResources().getString(R.string.amount) + db_cart.getCartDelCharge() + "\n" +
+                getResources().getString(R.string.delivery_charge) + db_cart.getCartDelCharge() + "\n" +
                 getResources().getString(R.string.total_amount) +
-                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + " " + getResources().getString(R.string.currency));
+                db_cart.getTotalAmount() + " + " + db_cart.getCartDelCharge() + " = " + total + " " + getResources().getString(R.string.currency));
 
         tv_pay_total.setText("Pay "+total + " " + getResources().getString(R.string.currency));
 

@@ -158,7 +158,8 @@ public class Product_fragment extends Fragment {
                         promodecolourandsizeList = new ArrayList<>(response.getJSONArray("data").length());
                         for(int p=0;p<response.getJSONArray("data").length();p++)
                         {
-                            product_modelList.add(new Product_model(response.getJSONArray("data").getJSONObject(0).getString("product_id")
+                            Log.e("responce proid" , ""+response.getJSONArray("data").getJSONObject(p).getString("product_id"));
+                            product_modelList.add(new Product_model(response.getJSONArray("data").getJSONObject(p).getString("product_id")
                                     ,response.getJSONArray("data").getJSONObject(p).getString("product_name"),
                                     response.getJSONArray("data").getJSONObject(p).getString("product_description"),
                                     response.getJSONArray("data").getJSONObject(p).getString("product_image"),
@@ -199,14 +200,17 @@ public class Product_fragment extends Fragment {
                                 String sepelistsize = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("s_size").split(",")).get(0).toString();
                                 promodecolourandsizeList.add(new Product_model(sepelistcolor,sepelistsize));
                             }
-                            if(!response.getJSONArray("data").getJSONObject(p).getString("cloth_color").isEmpty()
+                            else
+                                if(!response.getJSONArray("data").getJSONObject(p).getString("cloth_color").isEmpty()
                                     &&  !response.getJSONArray("data").getJSONObject(p).getString("cloth_size").isEmpty()){
                                 String sepelistcolor1 = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("cloth_color").split(",")).get(0).toString();
                                 String sepelistsize1 = Arrays.asList(response.getJSONArray("data").getJSONObject(p).getString("cloth_size").split(",")).get(0).toString();
                                 promodecolourandsizeList.add(new Product_model(sepelistcolor1,sepelistsize1));
 //       promodecolourandsizeList.add(new Product_model(response.getJSONArray("data").getJSONObject(p).getString("cloth_color").toString()
 //               ,response.getJSONArray("data").getJSONObject(p).getString("cloth_size")));
-                            }
+                            }else {
+                                    promodecolourandsizeList.add(new Product_model("None","None"));
+                                }
                         }
                         //   Log.e("product" , "json"+response.getJSONArray());
                         adapter_product = new Product_adapter(product_modelList, getActivity());

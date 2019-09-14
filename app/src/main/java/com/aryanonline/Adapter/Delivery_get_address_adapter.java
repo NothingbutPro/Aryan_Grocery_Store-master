@@ -156,7 +156,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
        // holder.tv_address.setText(mList.getSocity_name());
         holder.tv_phone.setText(mList.getReceiver_mobile());
         holder.tv_name.setText(mList.getReceiver_name());
-        holder.tv_charges.setText(mList.getDelivery_charge());
+       // holder.tv_charges.setText(mList.getDelivery_charge());
         holder.tv_adres_deliver.setText(mList.getHouse_no());
 
         holder.rb_select.setChecked(mList.getIscheckd());

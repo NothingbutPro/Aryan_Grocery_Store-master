@@ -64,7 +64,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     TextView tv_guestuser, tv_guestmobile;
     String Guestuser, Guestmobile;
 
-    private TextView tv_afternoon, tv_morning, tv_total, tv_item, tv_socity;
+    private TextView tv_afternoon, tv_morning, tv_total, tv_item, tv_socity,ttldelchr;
     private TextView tv_date, tv_time, tv_add_address;
     private EditText et_address;
     private Button btn_checkout;
@@ -83,6 +83,8 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private String getdate = "";
 
     private String deli_charges;
+    private String totdeli_charges;
+    List<Integer> deli_chargesList = new ArrayList<>();
     private String getlocation_id;
     private String getpin;
     private String gethouse;
@@ -125,6 +127,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
         tv_date = (TextView) view.findViewById(R.id.tv_deli_date);
         tv_time = (TextView) view.findViewById(R.id.tv_deli_fromtime);
+        ttldelchr = (TextView) view.findViewById(R.id.ttldelchr);
         tv_add_address = (TextView) view.findViewById(R.id.tv_deli_add_address);
         tv_total = (TextView) view.findViewById(R.id.tv_deli_total);
         tv_item = (TextView) view.findViewById(R.id.tv_deli_item);
@@ -136,6 +139,10 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
 
         db_cart = new DatabaseHandler(getActivity());
+
+
+            totdeli_charges = db_cart.getCartDelCharge();
+        Log.e("totdeli_charges " ,""+totdeli_charges);
         tv_total.setText("" + db_cart.getTotalAmount());
         tv_item.setText("" + db_cart.getCartCount());
 
@@ -419,9 +426,11 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
                 deli_charges = intent.getStringExtra("charge");
                 //Toast.makeText(getActivity(), deli_charges, Toast.LENGTH_SHORT).show();
 
-                Double total = Double.parseDouble(db_cart.getTotalAmount()) + Integer.parseInt(deli_charges);
+                Double total = Double.parseDouble(db_cart.getTotalAmount()) + Integer.parseInt(totdeli_charges);
 
-                tv_total.setText("" + db_cart.getTotalAmount() + " + " + deli_charges + " = " + total);
+               // tv_total.setText("" + db_cart.getTotalAmount() + " + " + deli_charges + " = " + total);
+                tv_total.setText("" + db_cart.getTotalAmount());
+                ttldelchr.setText( totdeli_charges  + " = " + total);
             }
         }
     };

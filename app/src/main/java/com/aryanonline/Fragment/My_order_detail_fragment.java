@@ -52,6 +52,7 @@ public class My_order_detail_fragment extends Fragment {
     private TextView tv_date, tv_time, tv_total, tv_delivery_charge;
     private Button btn_cancle;
     private RecyclerView rv_detail_order;
+    int DeliveryTotal =0;
 
     private String sale_id;
 
@@ -97,11 +98,13 @@ public class My_order_detail_fragment extends Fragment {
         tv_total.setText(total_rs);
         tv_date.setText(getResources().getString(R.string.date) + date);
         tv_time.setText(getResources().getString(R.string.time) + time);
-        tv_delivery_charge.setText(getResources().getString(R.string.delivery_charge) + deli_charge);
+//        tv_delivery_charge.setText(getResources().getString(R.string.delivery_charge) + deli_charge);
+
 
         // check internet connection
         if (ConnectivityReceiver.isConnected()) {
             makeGetOrderDetailRequest(sale_id);
+
         } else {
             ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
         }
@@ -155,6 +158,7 @@ public class My_order_detail_fragment extends Fragment {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("sale_id", sale_id);
+        Log.e("Sale id" , ""+sale_id);
 
         CustomVolleyJsonArrayRequest jsonObjReq = new CustomVolleyJsonArrayRequest(Request.Method.POST,
                 BaseURL.ORDER_DETAIL, params, new Response.Listener<JSONArray>() {
@@ -168,7 +172,12 @@ public class My_order_detail_fragment extends Fragment {
                 }.getType();
 
                 my_order_detail_modelList = gson.fromJson(response.toString(), listType);
-
+                Log.e("delivery_charg" , ""+my_order_detail_modelList.get(0).getTv_del_ch());
+                for(int i=0;i<my_order_detail_modelList.size();i++)
+                {
+                    DeliveryTotal = DeliveryTotal + Integer.valueOf(my_order_detail_modelList.get(i).getTv_del_ch());
+                }
+                tv_delivery_charge.setText(getResources().getString(R.string.delivery_charge) + DeliveryTotal);
                 My_order_detail_adapter adapter = new My_order_detail_adapter(my_order_detail_modelList);
                 rv_detail_order.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

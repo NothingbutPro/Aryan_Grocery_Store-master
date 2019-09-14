@@ -13,13 +13,13 @@ public class My_order_detail_model {
     String price;
     String qty_in_kg;
     String product_image;
-    String tv_del_ch;
+    String delivery_charg;
     public String getTv_del_ch() {
-        return tv_del_ch;
+        return delivery_charg;
     }
 
-    public void setTv_del_ch(String tv_del_ch) {
-        this.tv_del_ch = tv_del_ch;
+    public void setTv_del_ch(String delivery_charg) {
+        this.delivery_charg = delivery_charg;
     }
 
 

@@ -104,6 +104,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 HashMap<String, String> map = new HashMap<>();
 
                 map.put("product_id", modelList.get(position).getProductId());
+                Log.e("product_id is " , ""+modelList.get(position).getProductId());
                 map.put("category_id", modelList.get(position).getCategoryId());
                 map.put("product_image", modelList.get(position).getProductImage());
                 map.put("increament", modelList.get(position).getIncreament());
@@ -115,46 +116,56 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("delivery_charg", modelList.get(position).getDelivery_charg());
                 map.put("Mrp", modelList.get(position).getMrp());
                 map.put("unit_value", modelList.get(position).getUnitValue());
-
+                map.put("cod", modelList.get(position).getCod());
+//                map.put("size",modelList.get(position).getColour());
+//                map.put("colour",modelList.get(position).getSize());
+//                map.put("colour",promodecolourandsizeList.get(position).getColour());
                 if(!modelList.get(position).getCloth_color().isEmpty()) {
                     // map.put("cloth_colour", modelList.get(position).getCloth_color());
                     // map.put("colour", modelList.get(position).getCloth_color());
                     map.put("colour",promodecolourandsizeList.get(position).getColour());
-                }
-                map.put("cod", modelList.get(position).getCod());
+                }else
                 if(!modelList.get(position).getS_clolor().isEmpty()) {
                     //map.put("s_colour", modelList.get(position).getS_clolor());
 //                    map.put("colour", modelList.get(position).getS_clolor());
                     map.put("colour",promodecolourandsizeList.get(position).getColour());
+                }else {
+                    map.put("colour","None");
                 }
                 Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
                 if(!modelList.get(position).getS_size().isEmpty()) {
                     //  map.put("size", modelList.get(position).getS_size());
                     map.put("size",promodecolourandsizeList.get(position).getSize());
-                }
+                } else
                 if(!modelList.get(position).getCloth_size().isEmpty()) {
                     //  map.put("size", modelList.get(position).getCloth_size());
                     map.put("size",promodecolourandsizeList.get(position).getSize());
+                }else {
+                    map.put("size","None");
                 }
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
                     if (dbcart.isInCart(map.get("product_id"))) {
-                        if(!map.get("size").isEmpty() || !map.get("colour").isEmpty()) {
-                            map.put("size" , "None");
-                            map.put("colour" , "None");
-                            dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                        if(map.get("size").equals("None") || map.get("colour").equals("None")) {
+//                            map.put("size" , "None");
+//                            map.put("colour" , "None");
+                       //  Boolean bx= dbcart.setCartwithoutsize(map, Float.valueOf(tv_contetiy.getText().toString()));
+                         Boolean bx=  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+
                             tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//
                         }else {
-                            map.put("size" , "None");
-                            map.put("colour" , "None");
-                            dbcart.setCartwithoutsize(map, Float.valueOf(tv_contetiy.getText().toString()));
-                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                            map.put("size" , "None");
+//                            map.put("colour" , "None");
+                            Boolean bx=   dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                            dbcart.setCartwithoutsize(map, Float.valueOf(tv_contetiy.getText().toString()));
+                            tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
                         }
                     } else {
-                        map.put("size" , "None");
-                        map.put("colour" , "None");
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                        map.put("size" , "None");
+//                        map.put("colour" , "None");
+                        Boolean bx=  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     }
                 } else {
@@ -288,7 +299,11 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
         holder.tv_price.setText(" " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
         try {
-            holder.tv_colournsize.setText("Selected Color " + promodecolourandsizeList.get(position).getColour() + " With " + promodecolourandsizeList.get(position).getSize());
+            if(!promodecolourandsizeList.get(position).getColour().equals("None")) {
+                holder.tv_colournsize.setText("Selected Colour " + promodecolourandsizeList.get(position).getSize() + " With " + promodecolourandsizeList.get(position).getColour());
+            }else {
+                holder.tv_colournsize.setVisibility(View.GONE);
+            }
         }catch (Exception e)
         {
             e.printStackTrace();

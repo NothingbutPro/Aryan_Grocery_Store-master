@@ -41,8 +41,8 @@ public class Product_model implements Serializable {
 
 
 
-    private String colour;
-    private String size;
+    private String colour = "None";
+    private String size = "None";
     private String s_size;
     private String cloth_color;
     private String cloth_size;

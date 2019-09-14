@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,9 +86,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
             values.put(COLUMN_DELIVERY, map.get(COLUMN_DELIVERY));
-//            values.put(COLUMN_COLOUR, map.get(COLUMN_COLOUR));
+            values.put(COLUMN_COLOUR, map.get(COLUMN_COLOUR));
+            values.put(COLUMN_DELIVERY, map.get(COLUMN_DELIVERY));
 
-//            values.put(COLUMN_SIZE, map.get(COLUMN_SIZE));
+            values.put(COLUMN_SIZE, map.get(COLUMN_SIZE));
 
             db.insert(CART_TABLE, null, values);
             return true;
@@ -95,6 +97,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
     public boolean setCart(HashMap<String, String> map, Float Qty) {
         db = getWritableDatabase();
+        String pro_id = map.get(COLUMN_ID);
         if (isInCart(map.get(COLUMN_ID))) {
             db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
             return false;
@@ -125,6 +128,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public boolean isInCart(String id) {
         db = getReadableDatabase();
         String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
+        Log.e("query is" , ""+qry);
         Cursor cursor = db.rawQuery(qry, null);
         cursor.moveToFirst();
         if (cursor.getCount() > 0) return true;
@@ -159,6 +163,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String qry = "Select *  from " + CART_TABLE;
         Cursor cursor = db.rawQuery(qry, null);
         return cursor.getCount();
+    }
+    public String getCartDelCharge() {
+
+        db = getReadableDatabase();
+       // String qry = "Select SUM(""+COLUMN_DELIVERY+""+) as total_del  from " + CART_TABLE;
+        String qry = "Select SUM "+"("+COLUMN_DELIVERY+")"+" as delivery_charg  from " + CART_TABLE;
+        Cursor cursor = db.rawQuery(qry, null);
+        cursor.moveToFirst();
+        Log.e("cursor.getColumnCount();" , ""+cursor.getColumnCount());
+//        cursor.getColumnCount();
+        String total_del = cursor.getString(cursor.getColumnIndex("delivery_charg"));
+        if (total_del != null) {
+
+            return total_del;
+        } else {
+            return "0";
+        }
     }
 
     public String getTotalAmount() {
