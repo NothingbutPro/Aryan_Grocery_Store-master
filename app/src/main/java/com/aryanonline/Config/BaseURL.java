@@ -86,7 +86,8 @@ public class BaseURL {
 
     public static String GET_ADDRESS_URL = BASE_URL + "index.php/api/get_address";
 
-    public static String FORGOT_URL = BASE_URL + "index.php/api/forgot_password";
+
+  //  public static String FORGOT_URL = BASE_URL + "index.php/api/forgot_password";
 
     public static String JSON_RIGISTER_FCM = BASE_URL + "index.php/api/register_fcm";
 
@@ -122,7 +123,7 @@ public class BaseURL {
     public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "aryan-store/index.php/api/get_limit_settings";
 
     public static final String IMG_SLIDER_URL = BASEURL2 + "aryan-store/uploads/sliders/";
-
+    public static String FORGOT_URL = BASEURL2 + "aryan-store/index.php/api/forgot_password";
     public static final String IMG_CATEGORY_URL = BASEURL2 + "aryan-store/uploads/category/";
 
     public static final String IMG_PRODUCT_URL = BASEURL2 + "aryan-store/uploads/products/";

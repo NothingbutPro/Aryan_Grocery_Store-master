@@ -25,10 +25,13 @@ public class DealsModel implements Serializable {
     String p_offer_description;
     String delivery_charg;
 
+
+    String offers_persent;
+
     public DealsModel(String productId, String productName, String productDescription, String productImage, String categoryId,
                       String inStock, String price, String unitValue, String unit, String increament, String mrp,
                       String todayDeals, String offersCat, String dealsDescription, String offersCatDesc,
-                      String emi, String warranty, String product_offer_image, String p_offer_description,String delivery_charg) {
+                      String emi, String warranty, String product_offer_image, String p_offer_description,String delivery_charg,String offers_persent) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -49,11 +52,22 @@ public class DealsModel implements Serializable {
         this.product_offer_image=product_offer_image;
         this.p_offer_description=p_offer_description;
         this.delivery_charg=delivery_charg;
+        this.offers_persent =offers_persent;
     }
 
     public String getProductId() {
         return productId;
     }
+
+
+    public String getOffers_persent() {
+        return offers_persent;
+    }
+
+    public void setOffers_persent(String offers_persent) {
+        this.offers_persent = offers_persent;
+    }
+
 
     public void setProductId(String productId) {
         this.productId = productId;

@@ -18,6 +18,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aryanonline.Fragment.Show_pro_detail_fragment;
 import com.bumptech.glide.Glide;
@@ -46,12 +47,13 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private DatabaseHandler dbcart;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize,tv_delchr;
+        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize,tv_delchr,tvSubscriptioncart;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
 
         public MyViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
+            tvSubscriptioncart = (TextView) view.findViewById(R.id.tvSubscriptioncart);
             tv_delchr = (TextView) view.findViewById(R.id.tv_delchr);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
@@ -62,7 +64,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
             iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
             mrpPrice = (TextView) view.findViewById(R.id.mrpPrice);
-                tv_colournsize = (TextView) view.findViewById(R.id.tv_colournsize);
+            tv_colournsize = (TextView) view.findViewById(R.id.tv_colournsize);
 
             iv_remove.setVisibility(View.GONE);
 
@@ -108,6 +110,8 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("category_id", modelList.get(position).getCategoryId());
                 map.put("product_image", modelList.get(position).getProductImage());
                 map.put("increament", modelList.get(position).getIncreament());
+                map.put("offers_persent", modelList.get(position).getOffersPersent());
+
                 map.put("product_name", modelList.get(position).getProductName());
                 map.put("price", modelList.get(position).getPrice());
                 map.put("stock", modelList.get(position).getInStock());
@@ -177,6 +181,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 Double price = Double.parseDouble(map.get("price"));
 
                 tv_total.setText("" + price * items);
+
                 //      mrpPrice.setText(map.get("Mrp"));
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
@@ -186,9 +191,11 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 Bundle args = new Bundle();
                 Fragment fm = new Show_pro_detail_fragment();
                 args.putString("product_id", modelList.get(position).getProductId());
+                args.putString("standard_d_date", modelList.get(position).getStandard_d_date());
                 args.putString("category_id", modelList.get(position).getCategoryId());
                 args.putString("product_image", modelList.get(position).getProductImage());
                 args.putString("increament", modelList.get(position).getIncreament());
+                args.putString("offers_persent", modelList.get(position).getOffersPersent());
                 args.putString("product_name", modelList.get(position).getProductName());
                 args.putString("price", modelList.get(position).getPrice());
                 args.putString("stock", modelList.get(position).getInStock());
@@ -221,9 +228,11 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 Bundle args = new Bundle();
                 Fragment fm = new Show_pro_detail_fragment();
                 args.putString("product_id", modelList.get(position).getProductId());
+                args.putString("standard_d_date", modelList.get(position).getStandard_d_date());
                 args.putString("category_id", modelList.get(position).getCategoryId());
                 args.putString("cloth_colour", modelList.get(position).getCloth_color());
                 args.putString("cod", modelList.get(position).getCod());
+                args.putString("offers_persent", modelList.get(position).getOffersPersent());
                 args.putString("s_colour", modelList.get(position).getS_clolor());
                 Log.e("s_colour is",""+ modelList.get(position).getS_clolor());
                 args.putString("s_size", modelList.get(position).getS_size());
@@ -287,7 +296,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProductImage())
                 .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aryanmainlo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -295,13 +304,26 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         holder.tv_title.setText(mList.getProductName());
         holder.mrpPrice.setText(mList.getMrp());
+        if(!String.valueOf(mList.getOffersPersent()).equals("0")) {
+
+            //Toast.makeText(context, "value is"+String.valueOf(mList.getOffersPersent()), Toast.LENGTH_SHORT).show();
+            holder.tvSubscriptioncart.setText(String.valueOf(mList.getOffersPersent()) + "% off");
+            holder.tvSubscriptioncart.setVisibility(View.VISIBLE);
+//            notifyDataSetChanged();
+        }
+//        if(String.valueOf(mList.getOffersPersent()).equals("0"))
+//        {
+//            Toast.makeText(context, "value at else is"+String.valueOf(mList.getOffersPersent()), Toast.LENGTH_SHORT).show();
+//            holder.tvSubscriptioncart.setVisibility(View.GONE);
+////            notifyDataSetChanged();
+//        }
 //        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnitValue() + " " +
 //                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
         holder.tv_price.setText(" " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
         try {
             if(!promodecolourandsizeList.get(position).getColour().equals("None")) {
                 holder.tv_colournsize.setText("Selected Colour " + promodecolourandsizeList.get(position).getSize() + " With " + promodecolourandsizeList.get(position).getColour());
-            }else {
+            } {
                 holder.tv_colournsize.setVisibility(View.GONE);
             }
         }catch (Exception e)
@@ -383,7 +405,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //        Glide.with(context)
 //                .load(BaseURL.IMG_PRODUCT_URL + image)
 //                .centerCrop()
-//                .placeholder(R.drawable.logoimg)
+//                .placeholder(R.drawable.aryanmainlo)
 //                .crossFade()
 //                .into(iv_image);
 //
@@ -420,7 +442,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //        Glide.with(context)
 //                .load(BaseURL.IMG_PRODUCT_URL + image)
 //                .centerCrop()
-//                .placeholder(R.drawable.logoimg)
+//                .placeholder(R.drawable.aryanmainlo)
 //                .crossFade()
 //                .into(iv_image);
 //

@@ -65,7 +65,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
         Image = dealsModel.getProductImage();
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL+Image)
-                .placeholder(R.drawable.shop)
+                .placeholder(R.drawable.aryanmainlo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

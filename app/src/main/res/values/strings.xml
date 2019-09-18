@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">Aryan Store</string>
+    <string name="app_name">Aryan Online</string>
 
     <string name="currency">RS\u0020</string>
 <!--    <string name="currency">INR\u0020</string>-->
-    <string name="title_activity_main">Aryan Store</string>
+    <string name="title_activity_main">Aryan Online</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

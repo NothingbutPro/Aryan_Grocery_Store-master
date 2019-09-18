@@ -207,9 +207,11 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
             getdate();
         } else if (id == R.id.tv_deli_fromtime) {
 
-            if (TextUtils.isEmpty(getdate)) {
+            if (!TextUtils.isEmpty(getdate)) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else
+                {
                 Bundle args = new Bundle();
                 Fragment fm = new View_time_fragment();
                 args.putString("date", getdate);
@@ -290,7 +292,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
         if (TextUtils.isEmpty(getdate)) {
             Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
-           cancel = true;
+           cancel = false;
            // cancel = false;
         } else if (TextUtils.isEmpty(gettime)) {
             Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
@@ -323,8 +325,8 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
             Bundle args = new Bundle();
             Fragment fm = new Delivery_payment_detail_fragment();
-            args.putString("getdate", getdate);
-            args.putString("time", gettime);
+            args.putString("getdate", "None");
+            args.putString("time", "No Time");
             args.putString("location_id", location_id);
             args.putString("address", address);
             args.putString("deli_charges", deli_charges);

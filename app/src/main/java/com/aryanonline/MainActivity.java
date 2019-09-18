@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity
 
             Glide.with(this)
                     .load(BaseURL.IMG_PROFILE_URL + getimage)
-                    .placeholder(R.drawable.logoimg)
+                    .placeholder(R.drawable.aryanmainlo)
                     .crossFade()
                     .into(iv_profile);
             tv_name.setText(getname);

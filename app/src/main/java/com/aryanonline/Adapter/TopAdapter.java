@@ -67,7 +67,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
         Image = topModel.getProductImage();
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL+Image)
-                .placeholder(R.drawable.shop)
+                .placeholder(R.drawable.aryanmainlo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

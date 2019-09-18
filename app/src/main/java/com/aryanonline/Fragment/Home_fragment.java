@@ -232,8 +232,9 @@ public class Home_fragment extends Fragment {
                         Fragment fm = new Show_pro_detail_fragment();
                         args.putString("product_id", deals_list.get(position).getProductId());
                         args.putString("category_id", deals_list.get(position).getCategoryId());
+                     //   args.putString("offers_persent", deals_list.get(position).getOffersCat());
                         args.putString("product_image", deals_list.get(position).getProductImage());
-                        args.putString("increament", deals_list.get(position).getIncreament());
+                        args.putString("offers_persent", deals_list.get(position).getOffers_persent());
                         args.putString("product_name", deals_list.get(position).getProductName());
                         args.putString("price", deals_list.get(position).getPrice());
                         args.putString("stock", deals_list.get(position).getInStock());
@@ -274,7 +275,8 @@ public class Home_fragment extends Fragment {
                         args.putString("product_id", top_list.get(position).getProductId());
                         args.putString("category_id", top_list.get(position).getCategoryId());
                         args.putString("product_image", top_list.get(position).getProductImage());
-                        args.putString("increament", top_list.get(position).getIncreament());
+                        args.putString("offers_persent", top_list.get(position).getOffers_persent());
+                      //  args.putString("increament", top_list.get(position).getIncreament());
                         args.putString("product_name", top_list.get(position).getProductName());
                         args.putString("price", top_list.get(position).getPrice());
                         args.putString("stock", top_list.get(position).getInStock());
@@ -314,8 +316,10 @@ public class Home_fragment extends Fragment {
                         Fragment fm = new Show_pro_detail_fragment();
                         args.putString("product_id", offer_list.get(position).getProductId());
                         args.putString("category_id", offer_list.get(position).getCategoryId());
+                      //  args.putString("offers_persent", offer_list.get(position).getCategoryId());
                         args.putString("product_image", offer_list.get(position).getProductImage());
-                        args.putString("increament", offer_list.get(position).getIncreament());
+                        args.putString("offers_persent", offer_list.get(position).getOffers_persent());
+                     //   args.putString("increament", offer_list.get(position).getIncreament());
                         args.putString("product_name", offer_list.get(position).getProductName());
                         args.putString("price", offer_list.get(position).getPrice());
                         args.putString("stock", offer_list.get(position).getInStock());
@@ -327,8 +331,8 @@ public class Home_fragment extends Fragment {
 
                         args.putString("EMI", offer_list.get(position).getEmi());
                         args.putString("Warantee", offer_list.get(position).getWarranty());
-                        args.putString("product_offer_image", deals_list.get(position).getProduct_offer_image());
-                        args.putString("p_offer_description", deals_list.get(position).getP_offer_description());
+                        args.putString("product_offer_image", offer_list.get(position).getProduct_offer_image());
+                        args.putString("p_offer_description", offer_list.get(position).getP_offer_description());
 
                         fm.setArguments(args);
 
@@ -571,6 +575,7 @@ public class Home_fragment extends Fragment {
                         String unit_value = c.getString("unit_value");
                         String unit = c.getString("unit");
                         String increament = c.getString("increament");
+                        String offers_persent = c.getString("offers_persent");
                         String Mrp = c.getString("Mrp");
                         String today_deals = c.getString("today_deals");
                         String offers_cat = c.getString("offers_cat");
@@ -583,7 +588,7 @@ public class Home_fragment extends Fragment {
                         String top_product_status = c.getString("top_product_status");
                         offer_list.add(new OfferModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty
-                                ,product_offer_image,p_offer_description,top_product_status));
+                                ,product_offer_image,p_offer_description,top_product_status,offers_persent));
                     }
 
                     offerAdapter = new OfferAdapter(getActivity(), offer_list);
@@ -654,6 +659,7 @@ public class Home_fragment extends Fragment {
                         String unit_value = c.getString("unit_value");
                         String unit = c.getString("unit");
                         String increament = c.getString("increament");
+                        String offers_persent = c.getString("offers_persent");
                         String Mrp = c.getString("Mrp");
                         String today_deals = c.getString("today_deals");
                         String offers_cat = c.getString("offers_cat");
@@ -666,13 +672,13 @@ public class Home_fragment extends Fragment {
                         String delivery_charg = c.getString("delivery_charg");
                         deals_list.add(new DealsModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
-                                product_offer_image,p_offer_description , delivery_charg));
+                                product_offer_image,p_offer_description , delivery_charg,offers_persent));
 
                         AnimationDrawable animation = new AnimationDrawable();
                         try {
                             animation.addFrame((Drawable) Glide.with(getActivity())
                                     .load(BaseURL.IMG_PRODUCT_URL+product_image)
-                                    .placeholder(R.drawable.shop)
+                                    .placeholder(R.drawable.aryanmainlo)
                                     .crossFade()
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .dontAnimate()
@@ -759,6 +765,7 @@ public class Home_fragment extends Fragment {
                         String increament = c.getString("increament");
                         String Mrp = c.getString("Mrp");
                         String today_deals = c.getString("today_deals");
+                        String offers_persent = c.getString("offers_persent");
                         String offers_cat = c.getString("offers_cat");
                         String deals_description = c.getString("deals_description");
                         String offers_cat_desc = c.getString("offers_cat_desc");
@@ -769,7 +776,7 @@ public class Home_fragment extends Fragment {
                         String top_product_status = c.getString("top_product_status");
                         top_list.add(new TopModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
-                                product_offer_image,p_offer_description,top_product_status));
+                                product_offer_image,p_offer_description,top_product_status,offers_persent));
                     }
 
                     topAdapter = new TopAdapter(getActivity(), top_list);

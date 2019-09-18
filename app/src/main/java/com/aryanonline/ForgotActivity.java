@@ -116,7 +116,9 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
         String tag_json_obj = "json_forgot_req";
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("email", email);
+        params.put("email",email);
+        Log.e("email is ",""+email);
+
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.FORGOT_URL, params, new Response.Listener<JSONObject>() {

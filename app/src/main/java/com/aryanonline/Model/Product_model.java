@@ -38,9 +38,6 @@ public class Product_model implements Serializable {
     private String parent;
     //+++++++++++++++++++++++++++++++++++++++clothers+++++++++++++++++++++++++
     private String s_clolor;
-
-
-
     private String colour = "None";
     private String size = "None";
     private String s_size;
@@ -49,6 +46,8 @@ public class Product_model implements Serializable {
     private String replacement_policy;
     private String cod;
     private String delivery_charg;
+
+    private String standard_d_date;
     public String getDelivery_charg() {
         return delivery_charg;
     }
@@ -60,7 +59,7 @@ public class Product_model implements Serializable {
 
     //+++++++++++++++++++++++++++++++++++++++++++for+++++++++++++++++++
     public Product_model(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus, String date, String offersPersent, String offersWarranty, String stock, String title, String parent,String s_clolor,String s_size,String cloth_color,String cloth_size,
-                         String replacement_policy,String cod,String delivery_charg) {
+                         String replacement_policy,String cod,String delivery_charg,String standard_d_date) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -97,11 +96,20 @@ public class Product_model implements Serializable {
         this.stock = stock;
         this.title = title;
         this.parent = parent;
+        this.standard_d_date = standard_d_date;
     }
 
     public Product_model(String colour, String size) {
         this.colour = colour;
         this.size = size;
+    }
+
+    public String getStandard_d_date() {
+        return standard_d_date;
+    }
+
+    public void setStandard_d_date(String standard_d_date) {
+        this.standard_d_date = standard_d_date;
     }
 
     public String getpOfferDescription() {

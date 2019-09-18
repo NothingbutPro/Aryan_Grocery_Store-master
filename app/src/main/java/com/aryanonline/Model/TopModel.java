@@ -25,7 +25,12 @@ public class TopModel implements Serializable {
     private String pOfferDescription;
     private String topProductStatus;
 
-    public TopModel(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus) {
+
+
+    private String offers_persent;
+
+    public TopModel(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus
+    ,String offers_persent) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -46,6 +51,23 @@ public class TopModel implements Serializable {
         this.productOfferImage = productOfferImage;
         this.pOfferDescription = pOfferDescription;
         this.topProductStatus = topProductStatus;
+        this.offers_persent = offers_persent;
+    }
+
+    public String getpOfferDescription() {
+        return pOfferDescription;
+    }
+
+    public void setpOfferDescription(String pOfferDescription) {
+        this.pOfferDescription = pOfferDescription;
+    }
+
+    public String getOffers_persent() {
+        return offers_persent;
+    }
+
+    public void setOffers_persent(String offers_persent) {
+        this.offers_persent = offers_persent;
     }
 
     public String getProductId() {

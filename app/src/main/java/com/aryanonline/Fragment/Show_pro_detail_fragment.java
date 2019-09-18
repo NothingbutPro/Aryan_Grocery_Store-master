@@ -41,7 +41,7 @@ import static com.aryanonline.Fragment.Product_fragment.promodecolourandsizeList
 
 public class Show_pro_detail_fragment extends Fragment {
     TextView add_to_cart,prod_buy_now,prod_name,tv_prod_price,tv_prod_desc,prod_in_stock,
-            tv_emi,tv_waranty,tv_offer_desc,tv_price_only,tv_mrp_only,tv_del_charges;
+            tv_emi,tv_waranty,tv_offer_desc,tv_price_only,tv_mrp_only,tv_del_charges,standard_d_date,tvSubscription;
     //
     ImageView prod_img,iv_special_offer,offer_image;
     String shoe_colour ="no",cloth_colour = "no",cloth_size = "no",shoe_size = "no";
@@ -82,6 +82,8 @@ public class Show_pro_detail_fragment extends Fragment {
         replacetxt=view.findViewById(R.id.replacetxt);
         colour_sel2=view.findViewById(R.id.colour_sel2);
         tv_del_charges=view.findViewById(R.id.tv_del_charges);
+        standard_d_date=view.findViewById(R.id.standard_d_date);
+        tvSubscription=view.findViewById(R.id.tvSubscription);
         tv_price_only=view.findViewById(R.id.tv_price_only);
         tv_mrp_only=view.findViewById(R.id.tv_mrp_only);
         size_sel2=view.findViewById(R.id.size_sel2);
@@ -129,7 +131,11 @@ public class Show_pro_detail_fragment extends Fragment {
             map.put("category_id", getArguments().getString("category_id"));
             map.put("product_image", getArguments().getString("product_image"));
             map.put("increament", getArguments().getString("increament"));
+            map.put("offers_persent", getArguments().getString("offers_persent"));
             map.put("product_name", getArguments().getString("product_name"));
+            map.put("standard_d_date", getArguments().getString("standard_d_date"));
+           // map.put("offers_persent", getArguments().getString("offers_persent"));
+            Log.e("offers_persent" , ""+getArguments().getString("offers_persent"));
             map.put("price",getArguments().getString("price"));
             map.put("stock",getArguments().getString("stock"));
             map.put("title", getArguments().getString("title"));
@@ -187,6 +193,13 @@ public class Show_pro_detail_fragment extends Fragment {
         tv_prod_desc.setText("Product Description: "+map.get("Prod_description"));
         tv_price_only.setText("Price: "+map.get("price"));
         tv_mrp_only.setText("MRP: "+map.get("Mrp"));
+        Toast.makeText(getActivity(), "offer is "+map.get("offers_persent"), Toast.LENGTH_SHORT).show();
+        if(!map.get("offers_persent").toString().equals("0")) {
+            tvSubscription.setText(map.get("offers_persent").toString() + " % off");
+        }else {
+            tvSubscription.setVisibility(View.GONE);
+        }
+
       //  tv_prod_price.setText(map.get("unit_value")+" "+map.get("unit")+" "+"INR "+map.get("price"));
         tv_prod_price.setText(map.get("unit_value")+" "+map.get("unit"));
         try {
@@ -480,6 +493,7 @@ public class Show_pro_detail_fragment extends Fragment {
         //++++++++++++++++++++++++++++++end of  sizes+++++++++++++++++++++++++++++++++++++++
         tv_emi.setText(map.get("EMI"));
         tv_waranty.setText(map.get("Warantee"));
+        standard_d_date.setText(map.get("standard_d_date"));
         tv_offer_desc.setText(map.get("p_offer_description"));
 
         if(Integer.parseInt(getArguments().getString("stock")) >0){
@@ -493,7 +507,7 @@ public class Show_pro_detail_fragment extends Fragment {
         Glide.with(getActivity())
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_image"))
 //                .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aryanmainlo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -502,7 +516,7 @@ public class Show_pro_detail_fragment extends Fragment {
         Glide.with(getActivity())
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_offer_image"))
 //                .centerCrop()
-                // .placeholder(R.drawable.logoimg)
+                // .placeholder(R.drawable.aryanmainlo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -767,7 +781,7 @@ public class Show_pro_detail_fragment extends Fragment {
 
         Glide.with(getActivity())
                 .load(BaseURL.IMG_PRODUCT_URL + product_image)
-                .placeholder(R.drawable.shop)
+                .placeholder(R.drawable.aryanmainlo)
                 .crossFade()
                 .into(iv_image);
 

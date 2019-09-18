@@ -129,7 +129,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
             Glide.with(this)
                     .load(BaseURL.IMG_PROFILE_URL + getimage)
                     .centerCrop()
-                    .placeholder(R.drawable.logoimg)
+                    .placeholder(R.drawable.aryanmainlo)
                     .crossFade()
                     .into(iv_profile);
         }
@@ -187,7 +187,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                                         if (!user_image.isEmpty()){
                                             Glide.with(getActivity())
                                                     .load(BaseURL.IMG_PROFILE_URL + user_image)
-                                                    .placeholder(R.drawable.shop)
+                                                    .placeholder(R.drawable.aryanmainlo)
                                                     .crossFade()
                                                     .into(iv_profile);
                                         }

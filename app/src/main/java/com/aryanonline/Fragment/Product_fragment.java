@@ -158,7 +158,10 @@ public class Product_fragment extends Fragment {
                         promodecolourandsizeList = new ArrayList<>(response.getJSONArray("data").length());
                         for(int p=0;p<response.getJSONArray("data").length();p++)
                         {
+                            Log.e("offer pres" , ""+response.getJSONArray("data").getJSONObject(p).getString("offers_persent"));
                             Log.e("responce proid" , ""+response.getJSONArray("data").getJSONObject(p).getString("product_id"));
+                           // Toast.makeText(getActivity(), "offer discount at json is"+response.getJSONArray("data").getJSONObject(p).getString("offers_persent"), Toast.LENGTH_SHORT).show();
+//                            if(response.getJSONArray("data").getJSONObject(p).getString("offers_persent").)
                             product_modelList.add(new Product_model(response.getJSONArray("data").getJSONObject(p).getString("product_id")
                                     ,response.getJSONArray("data").getJSONObject(p).getString("product_name"),
                                     response.getJSONArray("data").getJSONObject(p).getString("product_description"),
@@ -191,7 +194,8 @@ public class Product_fragment extends Fragment {
                                     response.getJSONArray("data").getJSONObject(p).getString("cloth_size"),
                                     response.getJSONArray("data").getJSONObject(p).getString("replacement_policy"),
                                     response.getJSONArray("data").getJSONObject(p).getString("cod"),
-                                    response.getJSONArray("data").getJSONObject(p).getString("delivery_charg")
+                                    response.getJSONArray("data").getJSONObject(p).getString("delivery_charg"),
+                                    response.getJSONArray("data").getJSONObject(p).getString("standard_d_date")
                             ));
                             if(!response.getJSONArray("data").getJSONObject(p).getString("s_clolor").isEmpty() &&
                                     !response.getJSONArray("data").getJSONObject(p).getString("s_size").isEmpty())
