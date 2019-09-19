@@ -276,13 +276,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (response.equalsIgnoreCase("true")) {
                         AppPreference.setName(LoginActivity.this,user_fullname);
                         AppPreference.setMobile(LoginActivity.this,user_phone);
+                      //  new Session_management(LoginActivity.this).createLoginSession(user_id,user_fullname,user_email,pa);
                         Log.e("user_fullname",user_fullname);
                         Log.e("user_phone",user_phone);
                         et_email.setText("");
                         et_password.setText("");
 
 
-                        sessionManagement.createLoginSession(user_id,user_fullname,user_email,Password);
+                        sessionManagement.createLoginSession(user_id,user_fullname,user_email,Password,user_phone);
 
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

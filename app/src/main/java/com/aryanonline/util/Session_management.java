@@ -72,12 +72,13 @@ public class Session_management {
     }
 
 
-    public void createLoginSession(String id,String name,String email,String password ){
+    public void createLoginSession(String id,String name,String email,String password ,String mobileno ){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID, id);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_PASSWORD,password);
+        editor.putString(KEY_MOBILE,mobileno);
         editor.commit();
 
     }

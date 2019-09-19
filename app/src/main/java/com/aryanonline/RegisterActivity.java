@@ -292,7 +292,7 @@ public class RegisterActivity extends AppCompatActivity implements
                         AppPreference.setName(RegisterActivity.this, user_fullname);
                         AppPreference.setMobile(RegisterActivity.this, user_phone);
 
-                        sessionManagement.createLoginSession(user_id, user_fullname, user_email, password);
+                        sessionManagement.createLoginSession(user_id, user_fullname, user_email, password,user_phone);
                         et_name.setText("");
                         et_phone.setText("");
                         et_email.setText("");

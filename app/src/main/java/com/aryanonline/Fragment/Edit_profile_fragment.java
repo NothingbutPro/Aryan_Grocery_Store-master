@@ -319,7 +319,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
                 // check internet connection
                 if (ConnectivityReceiver.isConnected()) {
-                    new editProfile(user_id, getname, getphone).execute();
+                    new editProfile(user_id, getname, getphone,et_email.getText().toString()).execute();
                 }
             }
         }
@@ -402,13 +402,14 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         String getsocity;
         String getimage;
 
-        public editProfile(String user_id, String name, String phone) {
+        public editProfile(String user_id, String name, String phone, String email) {
 
             nameValuePairs = new ArrayList<NameValuePair>();
 
             nameValuePairs.add(new NameValuePair("user_id", user_id));
             nameValuePairs.add(new NameValuePair("user_fullname", name));
             nameValuePairs.add(new NameValuePair("user_mobile", phone));
+            nameValuePairs.add(new NameValuePair("user_email", email));
             /*nameValuePairs.add(new NameValuePair("pincode", pincode));
             nameValuePairs.add(new NameValuePair("socity_id", socity_id));
             nameValuePairs.add(new NameValuePair("house_no", house));*/
@@ -441,12 +442,12 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                     //success_msg = jObj.getString("data");
 
                     JSONObject obj = jObj.getJSONObject("data");
-
+                    //number 9977333986
                     getphone = obj.getString("user_phone");
                     getname = obj.getString("user_fullname");
-                    getpin = obj.getString("pincode");
-                    gethouse = obj.getString("house_no");
-                    getsocity = obj.getString("socity_id");
+//                    getpin = obj.getString("pincode");
+             //       gethouse = obj.getString("house_no");
+             //       getsocity = obj.getString("socity_id");
                     getimage = obj.getString("user_image");
 
                 } else {

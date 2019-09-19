@@ -47,12 +47,13 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private DatabaseHandler dbcart;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize,tv_delchr,tvSubscriptioncart;
-        public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
+        public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize,tv_delchr,tvSubscriptioncart,freename;
+        public ImageView iv_logo, iv_plus, iv_minus, iv_remove,freeimage;
 
         public MyViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
+            freename = (TextView) view.findViewById(R.id.freename);
             tvSubscriptioncart = (TextView) view.findViewById(R.id.tvSubscriptioncart);
             tv_delchr = (TextView) view.findViewById(R.id.tv_delchr);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
@@ -62,6 +63,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
             iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
             iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
+            freeimage = (ImageView) view.findViewById(R.id.freeimage);
             iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
             mrpPrice = (TextView) view.findViewById(R.id.mrpPrice);
             tv_colournsize = (TextView) view.findViewById(R.id.tv_colournsize);
@@ -301,7 +303,19 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(holder.iv_logo);
-
+        if(!mList.getProductOfferImage().isEmpty()) {
+            holder.freeimage.setVisibility(View.VISIBLE);
+            Log.e("Address is", "" + BaseURL.IMG_PRODUCT_URL + mList.getProductOfferImage());
+            Glide.with(context)
+                    .load(BaseURL.IMG_PRODUCT_URL + mList.getProductOfferImage())
+                    .centerCrop()
+                    .placeholder(R.drawable.aryanmainlo)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate()
+                    .into(holder.freeimage);
+            holder.freename.setText(mList.getOffersCatDesc());
+        }
         holder.tv_title.setText(mList.getProductName());
         holder.mrpPrice.setText(mList.getMrp());
         if(!String.valueOf(mList.getOffersPersent()).equals("0")) {

@@ -162,7 +162,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
                         }
                     }else if (radio_online_pay.isChecked()){
                         //db_cart.getTotalAmount()
-                        callInstamojoPay(new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_EMAIL), AppPreference.getMobile(getActivity()) , "10","Online buying",new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_NAME));
+                        callInstamojoPay(new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_EMAIL),new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_MOBILE) , "10","Online buying",new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_NAME));
 
 
                     }else {
@@ -224,27 +224,46 @@ public class Delivery_payment_detail_fragment extends Fragment {
             @Override
             public void onSuccess(String response) {
                 pay_status = "Success";
-                Toast.makeText(getActivity().getApplicationContext(), response, Toast.LENGTH_LONG)
-                        .show();
-                Toast.makeText(getActivity(), "Online Payment Success", Toast.LENGTH_SHORT).show();
-                if (ConnectivityReceiver.isConnected()) {
-                    attemptOrder();
-                } else {
-                    ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+                try {
+
+                    if (ConnectivityReceiver.isConnected()) {
+                        if (response != null) {
+                            attemptOrder();
+
+                    }else {
+//                            Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+                    }
+                }catch (Exception e)
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), response, Toast.LENGTH_LONG)
+                            .show();
+                    e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(int code, String reason) {
-                Toast.makeText(getActivity().getApplicationContext(), "Failed: " + reason, Toast.LENGTH_LONG)
-                        .show();
-                Toast.makeText(getActivity(), "Having Problems", Toast.LENGTH_SHORT).show();
+                try {
+                    Log.e("Failed for", "" + reason);
+                    Toast.makeText(getActivity(), "Failed: with number "+new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_MOBILE) + reason, Toast.LENGTH_LONG)
+                            .show();
+                }catch (Exception e)
+                {
+                    Toast.makeText(getActivity(), "Failed please check your mobile number", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+//                Toast.makeText(getActivity(), "Having Problems", Toast.LENGTH_SHORT).show();
             }
         };
     }
 
     //+++++++++++++++++++++++++++++
     private void attemptOrder() {
+//        Toast.makeText(getActivity().getApplicationContext(), response, Toast.LENGTH_LONG)
+//                .show();
 
         // retrive data from cart database
         ArrayList<HashMap<String, String>> items = db_cart.getCartAll();
