@@ -255,7 +255,7 @@
         <LinearLayout
             android:id="@+id/freeli"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:background="@null"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -265,8 +265,8 @@
 
             <ImageView
                 android:id="@+id/freeimage"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
                 app:layout_constraintEnd_toEndOf="@+id/tv_subcat_add"
@@ -279,9 +279,20 @@
             android:id="@+id/freename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Free Product "
+            android:text="No Free Product"
             app:layout_constraintStart_toStartOf="@+id/freeli"
             app:layout_constraintTop_toBottomOf="@+id/freeli">
+
+
+        </TextView>
+        <TextView
+            android:background="@drawable/strike"
+            android:id="@+id/freenameprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintStart_toStartOf="@+id/freename"
+            app:layout_constraintTop_toBottomOf="@+id/freename">
 
 
         </TextView>

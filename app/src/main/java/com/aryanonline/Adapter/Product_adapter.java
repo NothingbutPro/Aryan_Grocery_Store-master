@@ -49,11 +49,13 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice,tv_colournsize,tv_delchr,tvSubscriptioncart,freename;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove,freeimage;
+        TextView freenameprice;
 
         public MyViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             freename = (TextView) view.findViewById(R.id.freename);
+            freenameprice = (TextView) view.findViewById(R.id.freenameprice);
             tvSubscriptioncart = (TextView) view.findViewById(R.id.tvSubscriptioncart);
             tv_delchr = (TextView) view.findViewById(R.id.tv_delchr);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
@@ -77,6 +79,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
             CardView cardView = (CardView) view.findViewById(R.id.card_view);
             cardView.setOnClickListener(this);
+            freeimage.setOnClickListener(this);
 
         }
 
@@ -92,7 +95,8 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
                 tv_contetiy.setText(String.valueOf(qty));
 
-            } else if (id == R.id.iv_subcat_minus) {
+            }
+            else if (id == R.id.iv_subcat_minus) {
 
                 int qty = 1;
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
@@ -103,7 +107,12 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                     tv_contetiy.setText(String.valueOf(qty));
                 }
 
-            } else if (id == R.id.tv_subcat_add) {
+            }     else if (id == R.id.freeimage) {
+
+                ShowImageNowFree(modelList.get(position).getProductOfferImage());
+
+            }
+            else if (id == R.id.tv_subcat_add) {
 
                 HashMap<String, String> map = new HashMap<>();
 
@@ -122,6 +131,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("delivery_charg", modelList.get(position).getDelivery_charg());
                 map.put("Mrp", modelList.get(position).getMrp());
                 map.put("unit_value", modelList.get(position).getUnitValue());
+                map.put("free_mrp", modelList.get(position).getFree_mrp());
                 map.put("cod", modelList.get(position).getCod());
 //                map.put("size",modelList.get(position).getColour());
 //                map.put("colour",modelList.get(position).getSize());
@@ -205,6 +215,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 args.putString("unit", modelList.get(position).getUnit());
                 args.putString("Mrp", modelList.get(position).getMrp());
                 args.putString("unit_value", modelList.get(position).getUnitValue());
+                args.putString("free_mrp", modelList.get(position).getFree_mrp());
                 args.putString("Prod_description", modelList.get(position).getProductDescription());
                 args.putString("EMI", modelList.get(position).getEmi());
                 args.putString("Warantee", modelList.get(position).getWarranty());
@@ -247,6 +258,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 args.putString("title", modelList.get(position).getTitle());
                 args.putString("unit", modelList.get(position).getUnit());
                 args.putString("Mrp", modelList.get(position).getMrp());
+                args.putString("free_mrp", modelList.get(position).getMrp());
                 args.putString("delivery_charg", modelList.get(position).getDelivery_charg());
                 args.putString("unit_value", modelList.get(position).getUnitValue());
                 args.putString("Prod_description", modelList.get(position).getProductDescription());
@@ -291,10 +303,10 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
     @Override
     public void onBindViewHolder(Product_adapter.MyViewHolder holder, int position) {
-        Product_model mList = modelList.get(position);
+        final Product_model mList = modelList.get(position);
         Log.e("mList.getProductImage()","mList.getProductImage() "+mList.getProductImage());
         Log.e("mList","mList.getProductImage() "+mList.getProductName());
-        holder.tv_delchr.setText(modelList.get(position).getDelivery_charg());
+        holder.tv_delchr.setText(modelList.get(position).getFree_product_name());
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProductImage())
                 .centerCrop()
@@ -303,19 +315,35 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(holder.iv_logo);
-        if(!mList.getProductOfferImage().isEmpty()) {
-            holder.freeimage.setVisibility(View.VISIBLE);
-            Log.e("Address is", "" + BaseURL.IMG_PRODUCT_URL + mList.getProductOfferImage());
-            Glide.with(context)
-                    .load(BaseURL.IMG_PRODUCT_URL + mList.getProductOfferImage())
-                    .centerCrop()
-                    .placeholder(R.drawable.aryanmainlo)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .dontAnimate()
-                    .into(holder.freeimage);
-            holder.freename.setText(mList.getOffersCatDesc());
+        try {
+
+
+            if (!mList.getProductOfferImage().isEmpty()) {
+                holder.freeimage.setVisibility(View.VISIBLE);
+                Log.e("Address is", "" + BaseURL.IMG_PRODUCT_URL + mList.getProductOfferImage());
+                Glide.with(context)
+                        .load(BaseURL.IMG_PRODUCT_URL + mList.getProductOfferImage())
+                        .centerCrop()
+                        .placeholder(R.drawable.aryanmainlo)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .into(holder.freeimage);
+                holder.freename.setText("Free "+mList.getFree_product_name());
+                Log.e("Stock is" , ""+mList.getStock());
+                holder.freenameprice.setText(" RS "+mList.getFree_mrp());
+
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
+//        holder.freeimage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ShowImageNowFree(mList.getProductOfferImage());
+//            }
+//        });
         holder.tv_title.setText(mList.getProductName());
         holder.mrpPrice.setText(mList.getMrp());
         if(!String.valueOf(mList.getOffersPersent()).equals("0")) {
@@ -356,6 +384,32 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Double price = Double.parseDouble(mList.getPrice());
 
         holder.tv_total.setText("" + price * items);
+
+    }
+
+    private void ShowImageNowFree(String productOfferImage) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.product_image_dialog);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.show();
+
+        ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
+        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_dialog_img);
+
+        Glide.with(context)
+                .load(BaseURL.IMG_PRODUCT_URL + productOfferImage)
+                .placeholder(R.drawable.aryanmainlo)
+                .crossFade()
+                .into(iv_image);
+
+        iv_image_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
     }
 

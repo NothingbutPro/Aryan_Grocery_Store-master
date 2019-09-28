@@ -47,6 +47,19 @@ public class Product_model implements Serializable {
     private String cod;
     private String delivery_charg;
 
+    public String getFree_product_name() {
+        return free_product_name;
+    }
+
+    public void setFree_product_name(String free_product_name) {
+        this.free_product_name = free_product_name;
+    }
+
+    private String free_product_name;
+
+
+    private String free_mrp;
+
     private String standard_d_date;
     public String getDelivery_charg() {
         return delivery_charg;
@@ -59,7 +72,7 @@ public class Product_model implements Serializable {
 
     //+++++++++++++++++++++++++++++++++++++++++++for+++++++++++++++++++
     public Product_model(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus, String date, String offersPersent, String offersWarranty, String stock, String title, String parent,String s_clolor,String s_size,String cloth_color,String cloth_size,
-                         String replacement_policy,String cod,String delivery_charg,String standard_d_date) {
+                         String replacement_policy,String cod,String delivery_charg,String standard_d_date,String free_mrp,String free_product_name) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -75,6 +88,8 @@ public class Product_model implements Serializable {
         this.replacement_policy = replacement_policy;
         this.delivery_charg = delivery_charg;
         this.cod = cod;
+        this.free_mrp = free_mrp;
+        this.free_product_name = free_product_name;
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++end
         this.price = price;
         this.unitValue = unitValue;
@@ -97,6 +112,13 @@ public class Product_model implements Serializable {
         this.title = title;
         this.parent = parent;
         this.standard_d_date = standard_d_date;
+    }
+    public String getFree_mrp() {
+        return free_mrp;
+    }
+
+    public void setFree_mrp(String free_mrp) {
+        this.free_mrp = free_mrp;
     }
 
     public Product_model(String colour, String size) {

@@ -43,6 +43,7 @@ public class Show_pro_detail_fragment extends Fragment {
     TextView add_to_cart,prod_buy_now,prod_name,tv_prod_price,tv_prod_desc,prod_in_stock,
             tv_emi,tv_waranty,tv_offer_desc,tv_price_only,tv_mrp_only,tv_del_charges,standard_d_date,tvSubscription;
     //
+    TextView pro_offer_price;
     ImageView prod_img,iv_special_offer,offer_image;
     String shoe_colour ="no",cloth_colour = "no",cloth_size = "no",shoe_size = "no";
     ArrayList<String> ColoursList = new ArrayList<>();
@@ -80,6 +81,7 @@ public class Show_pro_detail_fragment extends Fragment {
         add_to_cart=view.findViewById(R.id.add_to_cart);
         waryxt=view.findViewById(R.id.waryxt);
         replacetxt=view.findViewById(R.id.replacetxt);
+        pro_offer_price=view.findViewById(R.id.pro_offer_price);
         colour_sel2=view.findViewById(R.id.colour_sel2);
         tv_del_charges=view.findViewById(R.id.tv_del_charges);
         standard_d_date=view.findViewById(R.id.standard_d_date);
@@ -134,6 +136,7 @@ public class Show_pro_detail_fragment extends Fragment {
             map.put("offers_persent", getArguments().getString("offers_persent"));
             map.put("product_name", getArguments().getString("product_name"));
             map.put("standard_d_date", getArguments().getString("standard_d_date"));
+         //   map.put("free_mrp", getArguments().getString("free_mrp"));
            // map.put("offers_persent", getArguments().getString("offers_persent"));
             Log.e("offers_persent" , ""+getArguments().getString("offers_persent"));
             map.put("price",getArguments().getString("price"));
@@ -180,6 +183,7 @@ public class Show_pro_detail_fragment extends Fragment {
             //++++++++++++++++++++++++++++++++++++++++++++++++++
             map.put("unit", getArguments().getString("unit"));
             map.put("Mrp", getArguments().getString("Mrp"));
+            map.put("free_mrp", getArguments().getString("free_mrp"));
             map.put("unit_value", getArguments().getString("unit_value"));
             map.put("Prod_description", getArguments().getString("Prod_description"));
             map.put("EMI", getArguments().getString("EMI"));
@@ -190,6 +194,8 @@ public class Show_pro_detail_fragment extends Fragment {
             e.printStackTrace();
         }
         prod_name.setText(map.get("product_name"));
+
+        pro_offer_price.setText(map.get("free_mrp"));
         tv_prod_desc.setText("Product Description: "+map.get("Prod_description"));
         tv_price_only.setText("Price: "+map.get("price"));
         tv_mrp_only.setText("MRP: "+map.get("Mrp"));
@@ -495,7 +501,18 @@ public class Show_pro_detail_fragment extends Fragment {
         tv_waranty.setText(map.get("Warantee"));
         standard_d_date.setText(map.get("standard_d_date"));
         tv_offer_desc.setText(map.get("p_offer_description"));
+        tv_offer_desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Showonlytext(tv_offer_desc.getText().toString());
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 
+            }
+        });
         if(Integer.parseInt(getArguments().getString("stock")) >0){
             prod_in_stock.setText("In Stock");
         }else {
@@ -767,6 +784,31 @@ public class Show_pro_detail_fragment extends Fragment {
 
 
         return view;
+    }
+
+    private void Showonlytext(String freedes) {
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.freeprodes);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.show();
+
+        ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
+        TextView iv_text_view = (TextView) dialog.findViewById(R.id.iv_text_view);
+        iv_text_view.setText(freedes);
+//        Glide.with(getActivity())
+//                .load(BaseURL.IMG_PRODUCT_URL + freedes)
+//                .placeholder(R.drawable.aryanmainlo)
+//                .crossFade()
+//                .into(iv_image);
+
+        iv_image_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void showImage(String product_image) {

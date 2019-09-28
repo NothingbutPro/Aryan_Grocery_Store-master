@@ -238,12 +238,14 @@ public class Home_fragment extends Fragment {
                         args.putString("product_name", deals_list.get(position).getProductName());
                         args.putString("price", deals_list.get(position).getPrice());
                         args.putString("stock", deals_list.get(position).getInStock());
+                        args.putString("free_mrp", deals_list.get(position).getFree_mrp());
                         args.putString("title", deals_list.get(position).getProductName());
                         args.putString("unit", deals_list.get(position).getUnit());
                         args.putString("Mrp", deals_list.get(position).getMrp());
+
                         args.putString("unit_value", deals_list.get(position).getUnitValue());
                         args.putString("Prod_description", deals_list.get(position).getProductDescription());
-
+                        args.putString("increament", deals_list.get(position).getIncreament());
                         args.putString("EMI", deals_list.get(position).getEmi());
                         args.putString("delivery_charg", deals_list.get(position).getUnitValue());
                         args.putString("Warantee", deals_list.get(position).getWarranty());
@@ -276,14 +278,16 @@ public class Home_fragment extends Fragment {
                         args.putString("category_id", top_list.get(position).getCategoryId());
                         args.putString("product_image", top_list.get(position).getProductImage());
                         args.putString("offers_persent", top_list.get(position).getOffers_persent());
-                      //  args.putString("increament", top_list.get(position).getIncreament());
+                        args.putString("increament", top_list.get(position).getIncreament());
                         args.putString("product_name", top_list.get(position).getProductName());
                         args.putString("price", top_list.get(position).getPrice());
                         args.putString("stock", top_list.get(position).getInStock());
+                        args.putString("free_mrp", top_list.get(position).getFree_mrp());
                         args.putString("title", top_list.get(position).getProductName());
                         args.putString("unit", top_list.get(position).getUnit());
                         args.putString("Mrp", top_list.get(position).getMrp());
                         args.putString("unit_value", top_list.get(position).getUnitValue());
+
                         args.putString("Prod_description", top_list.get(position).getProductDescription());
 
                         args.putString("EMI", top_list.get(position).getEmi());
@@ -315,6 +319,7 @@ public class Home_fragment extends Fragment {
                         Bundle args = new Bundle();
                         Fragment fm = new Show_pro_detail_fragment();
                         args.putString("product_id", offer_list.get(position).getProductId());
+                        args.putString("free_mrp", offer_list.get(position).getFree_mrp());
                         args.putString("category_id", offer_list.get(position).getCategoryId());
                       //  args.putString("offers_persent", offer_list.get(position).getCategoryId());
                         args.putString("product_image", offer_list.get(position).getProductImage());
@@ -574,6 +579,7 @@ public class Home_fragment extends Fragment {
                         String price = c.getString("price");
                         String unit_value = c.getString("unit_value");
                         String unit = c.getString("unit");
+                        String free_mrp = c.getString("free_mrp");
                         String increament = c.getString("increament");
                         String offers_persent = c.getString("offers_persent");
                         String Mrp = c.getString("Mrp");
@@ -586,9 +592,10 @@ public class Home_fragment extends Fragment {
                         String product_offer_image = c.getString("product_offer_image");
                         String p_offer_description = c.getString("p_offer_description");
                         String top_product_status = c.getString("top_product_status");
+                        String free_product_name = c.getString("free_product_name");
                         offer_list.add(new OfferModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty
-                                ,product_offer_image,p_offer_description,top_product_status,offers_persent));
+                                ,product_offer_image,p_offer_description,top_product_status,offers_persent,free_mrp,free_product_name));
                     }
 
                     offerAdapter = new OfferAdapter(getActivity(), offer_list);
@@ -656,6 +663,7 @@ public class Home_fragment extends Fragment {
                         String category_id = c.getString("category_id");
                         String in_stock = c.getString("in_stock");
                         String price = c.getString("price");
+                        String free_mrp = c.getString("free_mrp");
                         String unit_value = c.getString("unit_value");
                         String unit = c.getString("unit");
                         String increament = c.getString("increament");
@@ -666,13 +674,14 @@ public class Home_fragment extends Fragment {
                         String deals_description = c.getString("deals_description");
                         String offers_cat_desc = c.getString("offers_cat_desc");
                         String emi = c.getString("emi");
+                        String free_product_name = c.getString("free_product_name");
                         String warranty = c.getString("warranty");
                         String product_offer_image = c.getString("product_offer_image");
                         String p_offer_description = c.getString("p_offer_description");
                         String delivery_charg = c.getString("delivery_charg");
                         deals_list.add(new DealsModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
-                                product_offer_image,p_offer_description , delivery_charg,offers_persent));
+                                product_offer_image,p_offer_description , delivery_charg,offers_persent,free_mrp,free_product_name));
 
                         AnimationDrawable animation = new AnimationDrawable();
                         try {
@@ -761,6 +770,7 @@ public class Home_fragment extends Fragment {
                         String in_stock = c.getString("in_stock");
                         String price = c.getString("price");
                         String unit_value = c.getString("unit_value");
+                        String free_mrp = c.getString("free_mrp");
                         String unit = c.getString("unit");
                         String increament = c.getString("increament");
                         String Mrp = c.getString("Mrp");
@@ -774,9 +784,11 @@ public class Home_fragment extends Fragment {
                         String product_offer_image = c.getString("product_offer_image");
                         String p_offer_description = c.getString("p_offer_description");
                         String top_product_status = c.getString("top_product_status");
+                        String free_product_name = c.getString("free_product_name");
+                       // String free_mrp = c.getString("free_mrp");
                         top_list.add(new TopModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
                                 ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
-                                product_offer_image,p_offer_description,top_product_status,offers_persent));
+                                product_offer_image,p_offer_description,top_product_status,offers_persent,free_mrp,free_product_name));
                     }
 
                     topAdapter = new TopAdapter(getActivity(), top_list);

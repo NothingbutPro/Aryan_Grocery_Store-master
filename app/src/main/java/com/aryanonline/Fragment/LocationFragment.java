@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -122,22 +123,25 @@ public class LocationFragment extends Fragment {
 
                   JSONObject obj = new JSONObject(output);
                   String responce = obj.getString("responce");
-                  JSONObject dataObj = obj.getJSONObject("data");
-                    String id = dataObj.getString("id");
-                    String pg_title = dataObj.getString("pg_title");
-                    String pg_slug = dataObj.getString("pg_slug");
-                    String pg_descri = dataObj.getString("pg_descri");
-                    String pg_status = dataObj.getString("pg_status");
-                    String pg_foot = dataObj.getString("pg_foot");
-                    String crated_date = dataObj.getString("crated_date");
+//                  JSONObject dataObj = obj.getJSONObject("data");
+                  JSONArray dataOJsonArray = obj.getJSONArray("data");
+                  for(int i=0;i<dataOJsonArray.length();i++) {
+                      String id = dataOJsonArray.getJSONObject(i).getString("id");
+                      String pg_title = dataOJsonArray.getJSONObject(i).getString("location_offers");
+                      String pg_slug = dataOJsonArray.getJSONObject(i).getString("type");
+                      String pg_descri = dataOJsonArray.getJSONObject(i).getString("status");
+//                      String pg_status = dataOJsonArray.getJSONObject(i).getString("pg_status");
+//                      String pg_foot = dataOJsonArray.getJSONObject(i).getString("pg_foot");
+//                      String crated_date = dataOJsonArray.getJSONObject(i).getString("crated_date");
 
-                    String newString = pg_descri.replace("<p><strong>", "");
-                    String newString2 = newString.replace("</strong></p>", "");
-                    String newString3 = newString2.replace("<p>", "");
-                    String newString4 = newString3.replace("</p>", "");
+                      String newString = pg_title.replace("<p><strong>", "");
+//                      String newString = pg_descri.replace("<p><strong>", "");
+                      String newString2 = newString.replace("</strong></p>", "");
+                      String newString3 = newString2.replace("<p>", "");
+                      String newString4 = newString3.replace("</p>", "");
 
-                    my_order_modelList.add(new My_Locatio_model(newString4,pg_title));
-
+                      my_order_modelList.add(new My_Locatio_model(newString, pg_title));
+                  }
                     locationAdapter = new LocationAdapter(getActivity(),my_order_modelList);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     rv_myorder.setLayoutManager(mLayoutManager);

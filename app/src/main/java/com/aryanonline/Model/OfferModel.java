@@ -26,6 +26,12 @@ public class OfferModel implements Serializable {
     String top_product_status;
 
 
+    String free_product_name;
+
+
+    String free_mrp;
+
+
 
     String offers_persent;
     public String getOffers_persent() {
@@ -38,7 +44,8 @@ public class OfferModel implements Serializable {
     public OfferModel(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock,
                       String price, String unitValue, String unit, String increament, String mrp, String todayDeals,
                       String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty,
-                      String product_offer_image, String p_offer_description, String top_product_status,String offers_persent) {
+                      String product_offer_image, String p_offer_description, String top_product_status, String offers_persent, String free_mrp
+    ,String free_product_name) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -60,8 +67,24 @@ public class OfferModel implements Serializable {
         this.p_offer_description=p_offer_description;
         this.top_product_status=top_product_status;
         this.offers_persent=offers_persent;
+        this.free_mrp=free_mrp;
+        this.free_product_name=free_product_name;
     }
 
+    public String getFree_product_name() {
+        return free_product_name;
+    }
+
+    public void setFree_product_name(String free_product_name) {
+        this.free_product_name = free_product_name;
+    }
+    public String getFree_mrp() {
+        return free_mrp;
+    }
+
+    public void setFree_mrp(String free_mrp) {
+        this.free_mrp = free_mrp;
+    }
     public String getProduct_offer_image() {
         return product_offer_image;
     }

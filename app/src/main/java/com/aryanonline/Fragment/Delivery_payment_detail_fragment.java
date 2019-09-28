@@ -281,6 +281,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
                     Log.e("Colour is",""+map.get("colour"));
                     Log.e("Size is " , ""+map.get("size"));
                     jObjP.put("unit_value", map.get("unit_value"));
+                    jObjP.put("free_mrp", map.get("free_mrp"));
                     jObjP.put("unit", map.get("unit"));
                     jObjP.put("price", map.get("price"));
                     jObjP.put("size", map.get("size"));

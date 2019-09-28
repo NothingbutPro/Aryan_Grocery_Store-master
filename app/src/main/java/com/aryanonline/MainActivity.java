@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aryanonline.Fragment.OfferFragment;
 import com.bumptech.glide.Glide;
 
 
@@ -365,7 +366,7 @@ public class MainActivity extends AppCompatActivity
 
 
         else if (id==R.id.nav_offer){
-
+          fm = new OfferFragment();
         }else if (id==R.id.nav_office){
             fm = new LocationFragment();
         }

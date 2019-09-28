@@ -291,11 +291,11 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
         boolean cancel = false;
 
         if (TextUtils.isEmpty(getdate)) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
            cancel = false;
            // cancel = false;
         } else if (TextUtils.isEmpty(gettime)) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
 //            cancel = true;
             cancel = false;
         }

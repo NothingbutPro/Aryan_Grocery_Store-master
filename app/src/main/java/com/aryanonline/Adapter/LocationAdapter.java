@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,15 +26,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tv_order_no,tv_office_add;
+        public WebView tv_order_no,tv_office_add;
         CardView cardeview;
         int pos;
 
         public ViewHolder(View view) {
             super(view);
 
-            tv_office_add = (TextView) view.findViewById(R.id.tv_office_add);
-            tv_order_no = (TextView) view.findViewById(R.id.tv_order_no);
+            tv_office_add = (WebView) view.findViewById(R.id.tv_office_add);
+            tv_order_no = (WebView) view.findViewById(R.id.tv_order_no);
             cardeview = (CardView) view.findViewById(R.id.card_view);
         }
     }
@@ -57,8 +58,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public void onBindViewHolder(final LocationAdapter.ViewHolder viewHolder, final int position) {
         My_Locatio_model my_locatio_model = locList.get(position);
-        viewHolder.tv_office_add.setText(my_locatio_model.getPg_descri());
-        viewHolder.tv_order_no.setText(my_locatio_model.getPg_title());
+        viewHolder.tv_office_add.loadData(my_locatio_model.getPg_descri(), "text/html; charset=UTF-8", null);
+        viewHolder.tv_order_no.loadData(my_locatio_model.getPg_title(), "text/html; charset=UTF-8", null);
+//        viewHolder.tv_office_add.setText(my_locatio_model.getPg_descri());
+//        viewHolder.tv_order_no.setText(my_locatio_model.getPg_title());
         viewHolder.cardeview.setTag(viewHolder);
         viewHolder.pos = position;
 

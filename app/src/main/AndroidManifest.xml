@@ -57,20 +57,9 @@
                    android:value="http://aryanonline.co.in/access_token.php "
             />
     </application>
-    <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS"/>
- 
-    <uses-permission-sdk-23 android:name="android.permission.READ_SMS"/>
- 
-    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE"/>
- 
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
- 
-    <uses-permission android:name="android.permission.READ_SMS"/>
- 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
  
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

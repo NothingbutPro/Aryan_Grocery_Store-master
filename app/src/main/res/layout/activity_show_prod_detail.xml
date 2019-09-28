@@ -170,17 +170,20 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:background="#fff"
                         android:elevation="4dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                       >
 
 
-                        <ImageView
-                            android:id="@+id/pro_offer"
+                        <TextView
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="200"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             app:srcCompat="@drawable/down_arrow" />
@@ -216,7 +219,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="0.5"
                         android:orientation="vertical"
@@ -242,6 +245,33 @@
                             android:visibility="gone" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="#fff"
+                    android:elevation="4dp"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <TextView
+                        android:padding="5dp"
+                        android:text="Price: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/down_arrow" />
+                    <TextView
+                        android:background="@drawable/strike"
+                        android:padding="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="200"
+                        android:id="@+id/pro_offer_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/down_arrow" />
 
                 </LinearLayout>
                 <!--</android.support.v7.widget.CardView>-->

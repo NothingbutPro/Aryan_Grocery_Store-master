@@ -27,10 +27,18 @@ public class TopModel implements Serializable {
 
 
 
+    private String free_mrp;
+
+
+
+    private String free_product_name;
+
+
+
     private String offers_persent;
 
-    public TopModel(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus
-    ,String offers_persent) {
+    public TopModel(String productId, String productName, String productDescription, String productImage, String categoryId, String inStock, String price, String unitValue, String unit, String increament, String mrp, String todayDeals, String offersCat, String dealsDescription, String offersCatDesc, String emi, String warranty, String productOfferImage, String pOfferDescription, String topProductStatus,String free_product_name
+    ,String offers_persent,String free_mrp) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -52,8 +60,22 @@ public class TopModel implements Serializable {
         this.pOfferDescription = pOfferDescription;
         this.topProductStatus = topProductStatus;
         this.offers_persent = offers_persent;
+        this.free_mrp = free_mrp;
+        this.free_product_name = free_product_name;
+    }
+    public String getFree_mrp() {
+        return free_mrp;
+    }
+    public String getFree_product_name() {
+        return free_product_name;
     }
 
+    public void setFree_product_name(String free_product_name) {
+        this.free_product_name = free_product_name;
+    }
+    public void setFree_mrp(String free_mrp) {
+        this.free_mrp = free_mrp;
+    }
     public String getpOfferDescription() {
         return pOfferDescription;
     }
