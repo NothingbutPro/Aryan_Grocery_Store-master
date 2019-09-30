@@ -56,12 +56,10 @@ import com.aryanonline.Adapter.DealsAdapter;
 import com.aryanonline.Adapter.Home_adapter;
 import com.aryanonline.Adapter.HorizontalAdapter;
 import com.aryanonline.Adapter.OfferAdapter;
-import com.aryanonline.Adapter.RecyclerViewHorizontalListAdapter;
 import com.aryanonline.Config.BaseURL;
 import com.aryanonline.Model.Category_model;
 import com.aryanonline.Model.Data;
 import com.aryanonline.Model.DealsModel;
-import com.aryanonline.Model.Grocery;
 import com.aryanonline.Model.OfferModel;
 import com.aryanonline.AppController;
 import com.aryanonline.MainActivity;
@@ -89,11 +87,10 @@ public class Home_fragment extends Fragment {
     EditText searchview;
     RecyclerView offerlist;
     HorizontalAdapter horizontalAdapter;
-    private List<Data> data= new ArrayList<>();
     RecyclerView dealsview;
-    private List<Grocery> groceryList = new ArrayList<>();
+    //private List<Grocery> groceryList = new ArrayList<>();
     private RecyclerView groceryRecyclerView;
-    private RecyclerViewHorizontalListAdapter groceryAdapter;
+//    private RecyclerViewHorizontalListAdapter groceryAdapter;
     private String server_url;
     ArrayList<OfferModel> offer_list;
     private OfferAdapter offerAdapter;
@@ -324,7 +321,7 @@ public class Home_fragment extends Fragment {
                       //  args.putString("offers_persent", offer_list.get(position).getCategoryId());
                         args.putString("product_image", offer_list.get(position).getProductImage());
                         args.putString("offers_persent", offer_list.get(position).getOffers_persent());
-                     //   args.putString("increament", offer_list.get(position).getIncreament());
+                       args.putString("increament", offer_list.get(position).getIncreament());
                         args.putString("product_name", offer_list.get(position).getProductName());
                         args.putString("price", offer_list.get(position).getPrice());
                         args.putString("stock", offer_list.get(position).getInStock());
@@ -368,17 +365,7 @@ public class Home_fragment extends Fragment {
         return view;
     }
 
-    private void populategroceryList(){
-        Grocery potato = new Grocery("", R.drawable.lap);
-        Grocery onion = new Grocery("", R.drawable.mobile);
-        Grocery cabbage = new Grocery("", R.drawable.tv);
-        Grocery cauliflower = new Grocery("", R.drawable.speak);
-        groceryList.add(potato);
-        groceryList.add(onion);
-        groceryList.add(cabbage);
-        groceryList.add(cauliflower);
-        groceryAdapter.notifyDataSetChanged();
-    }
+
 
     /**
      * Method to make json array request where json response starts wtih {

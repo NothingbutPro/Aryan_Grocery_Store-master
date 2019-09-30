@@ -136,7 +136,7 @@
                 android:background="@drawable/xml_textbox_bg"
                 android:id="@+id/txtSocity"
                 android:layout_marginBottom="5dp"
-                android:drawableRight="@mipmap/ic_next"
+                android:drawableRight="@drawable/ic_next"
                 android:gravity="left|center_vertical"
                 android:padding="10dp"/>-->
 

@@ -24,7 +24,7 @@
         android:layout_marginRight="@dimen/space_8"
         android:layout_marginTop="@dimen/space_8"
         android:background="@color/colorPrimary"
-        app:layout_constraintRight_toRightOf="@+id/iv_dialog_img"
+
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 

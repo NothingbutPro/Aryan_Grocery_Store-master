@@ -3,7 +3,7 @@
     <string name="app_name">Aryan Online</string>
 
     <string name="currency">RS\u0020</string>
-<!--    <string name="currency">INR\u0020</string>-->
+    <!--    <string name="currency">INR\u0020</string>-->
     <string name="title_activity_main">Aryan Online</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -168,5 +168,6 @@
     <string name="tv_btn_addcart">Add To Cart</string>
     <string name="tv_btn_gocart">Go To Cart</string>
     <string name="product_highlight">pppppppp \n rrrrrrrrr \n ttttttttttttttttt \n gggggggggggg </string>
+    <string name="title_feature1">Feature 1</string>
 
 </resources>

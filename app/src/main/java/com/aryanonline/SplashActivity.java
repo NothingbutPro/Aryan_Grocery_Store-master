@@ -17,6 +17,10 @@ import android.widget.TextView;
 
 import com.aryanonline.util.Session_management;
 
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 public class SplashActivity extends AppCompatActivity {
 
     TextView app_name;
@@ -24,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public static final int MY_PERMISSIONS_REQUEST_WRITE_FIELS = 102;
     private AlertDialog dialog;
+    private static final int REQUEST_CODE_PERMISSION = 2;
 
     private Session_management sessionManagement;
 
@@ -37,9 +42,8 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
-       // app_name = (TextView)findViewById(R.id.app_name);
+        // app_name = (TextView)findViewById(R.id.app_name);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
-
 
 
         sessionManagement = new Session_management(SplashActivity.this);
@@ -51,8 +55,8 @@ public class SplashActivity extends AppCompatActivity {
                     // Thread will sleep for 5 seconds
                     sleep(2 * 1000);
 
-                    // After 5 seconds redirect to another intent
-                    checkAppPermissions();
+                    // After 5 seconds redirect to another inten
+                    checkPermissions();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -64,8 +68,8 @@ public class SplashActivity extends AppCompatActivity {
         background.start();
     }
 
-    public void checkAppPermissions() {
-        if (ContextCompat.checkSelfPermission(this,
+    /* public void checkAppPermissions() {
+     *//*  if (ContextCompat.checkSelfPermission(this,
                         android.Manifest.permission.INTERNET)
                         != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this,
@@ -74,31 +78,64 @@ public class SplashActivity extends AppCompatActivity {
                 ContextCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_NETWORK_STATE)
                         != PackageManager.PERMISSION_GRANTED
-                ) {
+                )*//*
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.INTERNET) && ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.ACCESS_NETWORK_STATE)) {
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE) && ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_NETWORK_STATE)) {
                 go_next();
             } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{ android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                                android.Manifest.permission.INTERNET,
-                                android.Manifest.permission.ACCESS_NETWORK_STATE
-                        },
-                        MY_PERMISSIONS_REQUEST_WRITE_FIELS);
-            }
-        } else {
-            go_next();
+
+                go_next();
         }
+    }*/
+
+    private void checkPermissions() {
+//        go_next();
+        if (!(ActivityCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{READ_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSION);
+
+        }
+//        else
+//
+//            if (!(ActivityCompat.checkSelfPermission(this, ACCESS_NETWORK_STATE) == PERMISSION_GRANTED)) {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{ACCESS_NETWORK_STATE}, REQUEST_CODE_PERMISSION);
+//
+//        }
+        else {
+
+
+            go_next();
+
+        }
+
+
     }
 
-    @Override
+    public void go_next() {
+
+        if (sessionManagement.isLoggedIn()) {
+
+            Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(startmain);
+            finish();
+        } else {
+            Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(startmain);
+            finish();
+        }
+
+
+
+}
+
+
+  /*  @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_FIELS) {
             if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[0] == PERMISSION_GRANTED) {
                 go_next();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
@@ -136,7 +173,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 
-       /* if(sessionManagement.isLoggedIn()) {
+       *//* if(sessionManagement.isLoggedIn()) {
 
             sessionManagement.checkLogin();
 
@@ -147,7 +184,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         finish();*/
-    }
+
 
     public void openPermissionScreen() {
 
@@ -159,4 +196,9 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        checkPermissions();
+    }
 }

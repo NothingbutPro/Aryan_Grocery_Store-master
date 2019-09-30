@@ -36,22 +36,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         this.activity = activity;
 
         dbHandler = new DatabaseHandler(activity);
-        /*common = new CommonClass(activity);
-        File cacheDir = StorageUtils.getCacheDirectory(activity);
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.loading)
-                .showImageForEmptyUri(R.drawable.loading)
-                .showImageOnFail(R.drawable.loading)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .displayer(new SimpleBitmapDisplayer())
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .build();
 
-        imgconfig = new ImageLoaderConfiguration.Builder(activity)
-                .build();
-        ImageLoader.getInstance().init(imgconfig);*/
     }
 
     @Override
@@ -150,21 +135,6 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
 
             }
         });
-
-//        holder.tv_add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
-//
-//                Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
-//                Double price = Double.parseDouble(map.get("price"));
-//
-//                holder.tv_total.setText("" + price * items );
-//                //holder.tv_total.setText(activity.getResources().getString(R.string.tv_cart_total) + price * items + " " +activity.getResources().getString(R.string.currency));
-//                updateintent();
-//            }
-//        });
 
         holder.iv_remove.setOnClickListener(new View.OnClickListener() {
             @Override

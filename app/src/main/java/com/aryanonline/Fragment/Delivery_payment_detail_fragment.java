@@ -104,7 +104,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
         tv_timeslot.setText(getdate + " " + gettime);
         tv_address.setText(getaddress);
 
-        Double total = Double.parseDouble(db_cart.getTotalAmount()) +  Integer.valueOf( db_cart.getCartDelCharge());
+        final Double total = Double.parseDouble(db_cart.getTotalAmount()) +  Integer.valueOf( db_cart.getCartDelCharge());
 
         //tv_total.setText("" + db_cart.getTotalAmount());
         //tv_item.setText("" + db_cart.getCartCount());
@@ -162,7 +162,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
                         }
                     }else if (radio_online_pay.isChecked()){
                         //db_cart.getTotalAmount()
-                        callInstamojoPay(new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_EMAIL),new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_MOBILE) , "10","Online buying",new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_NAME));
+                        callInstamojoPay(new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_EMAIL),new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_MOBILE) , total.toString(),"Online buying",new Session_management(getActivity()).getUserDetails().get(BaseURL.KEY_NAME));
 
 
                     }else {

@@ -50,14 +50,7 @@ public class LocationFragment extends Fragment {
     }
 
 
-    public static LocationFragment newInstance(String param1, String param2) {
-        LocationFragment fragment = new LocationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
